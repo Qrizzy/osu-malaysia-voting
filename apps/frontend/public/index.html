@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+
+    <style>
+      html, body {
+        overflow-y: auto !important;
+        background-color: #121212;
+        padding: 0;
+        margin: 0;
+      }
+
+      .loading {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .loading-middle {
+        position: relative;
+      }
+
+      .trademark {
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        font-size: 13px;
+        letter-spacing: 3px;
+        color: white;
+        position: absolute;
+        top: 94px;
+        left: 75px;
+        text-align: center;
+      }
+
+      @keyframes ldio {
+        0% { transform: rotate(0) }
+        100% { transform: rotate(360deg) }
+      }
+      .ldio div { box-sizing: border-box!important }
+      .ldio > div {
+        position: absolute;
+        width: 128px;
+        height: 128px;
+        top: 36px;
+        left: 36px;
+        border-radius: 50%;
+        border: 12px solid #000;
+        border-color: #3c3c3c transparent #3c3c3c transparent;
+        animation: ldio 1s linear infinite;
+      }
+
+      .ldio > div:nth-child(2), .ldio > div:nth-child(4) {
+        width: 100px;
+        height: 100px;
+        top: 50px;
+        left: 50px;
+        animation: ldio 1s linear infinite reverse;
+      }
+      .ldio > div:nth-child(2) {
+        border-color: transparent #939393 transparent #939393
+      }
+      .ldio > div:nth-child(3) { border-color: transparent }
+      .ldio > div:nth-child(3) div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: rotate(45deg);
+      }
+      .ldio > div:nth-child(3) div:before, .ldio > div:nth-child(3) div:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        top: -12px;
+        left: 46px;
+        background: #3c3c3c;
+        border-radius: 50%;
+        box-shadow: 0 116px 0 0 #3c3c3c;
+      }
+      .ldio > div:nth-child(3) div:after {
+        left: -12px;
+        top: 46px;
+        box-shadow: 116px 0 0 0 #3c3c3c;
+      }
+
+      .ldio > div:nth-child(4) { border-color: transparent; }
+      .ldio > div:nth-child(4) div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: rotate(45deg);
+      }
+      .ldio > div:nth-child(4) div:before, .ldio > div:nth-child(4) div:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        top: -12px;
+        left: 32px;
+        background: #939393;
+        border-radius: 50%;
+        box-shadow: 0 88px 0 0 #939393;
+      }
+      .ldio > div:nth-child(4) div:after {
+        left: -12px;
+        top: 32px;
+        box-shadow: 88px 0 0 0 #939393;
+      }
+      .spinner-double-ring {
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        overflow: hidden;
+      }
+      .ldio {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform: translateZ(0) scale(1);
+        backface-visibility: hidden;
+        transform-origin: 0 0;
+      }
+      .ldio div { box-sizing: content-box; }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>
+        We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.
+      </strong>
+    </noscript>
+    <div id="app">
+      <div class="loading">
+        <div class="loading-middle">
+          <div class="trademark">hwchr</div>
+          <div class="spinner-double-ring"><div class="ldio">
+            <div></div>
+            <div></div>
+            <div><div></div></div>
+            <div><div></div></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "npmScope": "starter-vue-osu",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tslint.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "frontend": {
+      "tags": []
+    },
+    "frontend-e2e": {
+      "tags": [],
+      "implicitDependencies": ["frontend"]
+    },
+    "api": {
+      "tags": []
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  }
+}

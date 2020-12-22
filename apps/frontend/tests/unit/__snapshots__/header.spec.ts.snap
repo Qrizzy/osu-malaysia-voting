@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header.vue renders correctly when logged in 1`] = `
+<header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
+  <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.png" alt="Logo" class="logo mr-2">
+    <div class="v-toolbar__title">hwchr template</div>
+    <div class="spacer"></div>
+    <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a>
+      <hr role="separator" aria-orientation="vertical" class="v-divider v-divider--vertical theme--light">
+      <!----> <span class="v-tooltip v-tooltip--bottom"><!----><button type="button" class="v-btn v-btn--flat v-btn--text theme--light v-size--default" role="button" aria-haspopup="true" aria-expanded="false"><span class="v-btn__content"><div class="v-avatar mr-2" style="height: 28px; min-width: 28px; width: 28px;"><img src="test-website.com" alt="U"></div>
+          Log out
+        </span></button></span>
+    </div>
+    <div class="mobile-nav hidden-md-and-up"><button type="button" class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default" role="button" aria-haspopup="true" aria-expanded="false"><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu theme--light"></i></span></button>
+      <div class="v-menu">
+        <!---->
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header.vue renders correctly when logged out 1`] = `
+<header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
+  <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.png" alt="Logo" class="logo mr-2">
+    <div class="v-toolbar__title">hwchr template</div>
+    <div class="spacer"></div>
+    <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a>
+      <hr role="separator" aria-orientation="vertical" class="v-divider v-divider--vertical theme--light"> <button type="button" class="v-btn v-btn--flat v-btn--text theme--light v-size--default"><span class="v-btn__content">Log in</span></button> <span class="v-tooltip v-tooltip--bottom"><!----></span>
+    </div>
+    <div class="mobile-nav hidden-md-and-up"><button type="button" class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default" role="button" aria-haspopup="true" aria-expanded="false"><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu theme--light"></i></span></button>
+      <div class="v-menu">
+        <!---->
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header.vue renders correctly when logging in 1`] = `
+<header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
+  <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.png" alt="Logo" class="logo mr-2">
+    <div class="v-toolbar__title">hwchr template</div>
+    <div class="spacer"></div>
+    <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a>
+      <hr role="separator" aria-orientation="vertical" class="v-divider v-divider--vertical theme--light"> <button type="button" class="v-btn v-btn--flat v-btn--loading v-btn--text theme--light v-size--default"><span class="v-btn__content">Log in</span><span class="v-btn__loader"><div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="v-progress-circular v-progress-circular--indeterminate" style="height: 23px; width: 23px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381" style="transform: rotate(0deg);"><circle fill="transparent" cx="43.80952380952381" cy="43.80952380952381" r="20" stroke-width="3.8095238095238093" stroke-dasharray="125.664" stroke-dashoffset="125.66370614359172px" class="v-progress-circular__overlay"></circle></svg><div class="v-progress-circular__info"></div></div></span></button> <span class="v-tooltip v-tooltip--bottom"><!----></span>
+    </div>
+    <div class="mobile-nav hidden-md-and-up"><button type="button" class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default" role="button" aria-haspopup="true" aria-expanded="false"><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu theme--light"></i></span></button>
+      <div class="v-menu">
+        <!---->
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`Header.vue renders correctly when logging out 1`] = `
+<header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
+  <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.png" alt="Logo" class="logo mr-2">
+    <div class="v-toolbar__title">hwchr template</div>
+    <div class="spacer"></div>
+    <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a>
+      <hr role="separator" aria-orientation="vertical" class="v-divider v-divider--vertical theme--light">
+      <!----> <span class="v-tooltip v-tooltip--bottom"><!----><button type="button" class="v-btn v-btn--flat v-btn--loading v-btn--text theme--light v-size--default" role="button" aria-haspopup="true" aria-expanded="false"><span class="v-btn__content"><div class="v-avatar mr-2" style="height: 28px; min-width: 28px; width: 28px;"><img alt="U"></div>
+          Log out
+        </span><span class="v-btn__loader"><div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="v-progress-circular v-progress-circular--indeterminate" style="height: 23px; width: 23px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="21.904761904761905 21.904761904761905 43.80952380952381 43.80952380952381" style="transform: rotate(0deg);"><circle fill="transparent" cx="43.80952380952381" cy="43.80952380952381" r="20" stroke-width="3.8095238095238093" stroke-dasharray="125.664" stroke-dashoffset="125.66370614359172px" class="v-progress-circular__overlay"></circle></svg><div class="v-progress-circular__info"></div></div></span></button></span>
+    </div>
+    <div class="mobile-nav hidden-md-and-up"><button type="button" class="v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default" role="button" aria-haspopup="true" aria-expanded="false"><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu theme--light"></i></span></button>
+      <div class="v-menu">
+        <!---->
+      </div>
+    </div>
+  </div>
+</header>
+`;
