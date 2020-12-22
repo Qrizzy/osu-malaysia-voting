@@ -1,5 +1,5 @@
 {
-  "npmScope": "starter-vue-osu",
+  "npmScope": "osu-voting",
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {

@@ -1,7 +1,7 @@
 <template>
   <v-app-bar fixed elevate-on-scroll dense app>
     <img src="../assets/logo.png" alt="Logo" class="logo mr-2">
-    <v-toolbar-title>hwchr template</v-toolbar-title>
+    <v-toolbar-title>German top 10 voting</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
@@ -9,6 +9,8 @@
     <v-toolbar-items class="nav hidden-sm-and-down">
       <v-btn to="/" text>Home</v-btn>
       <v-btn to="/about" text>About</v-btn>
+      <v-btn to="/vote" text v-if="loggedIn">Vote</v-btn>
+      <v-btn to="/past" text>Past results</v-btn>
 
       <v-divider vertical></v-divider>
 
@@ -39,6 +41,8 @@
         <v-list>
           <v-list-item to="/">Home</v-list-item>
           <v-list-item to="/about">About</v-list-item>
+          <v-list-item to="/vote" v-if="loggedIn">Vote</v-list-item>
+          <v-list-item to="/past">Past results</v-list-item>
           <v-list-item v-if="!loggedIn" @click="logIn()">Log in</v-list-item>
           <v-list-item v-if="loggedIn" @click="logOut()">Log out</v-list-item>
         </v-list>

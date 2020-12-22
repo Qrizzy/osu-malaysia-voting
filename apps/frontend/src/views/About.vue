@@ -4,38 +4,51 @@
       <v-card>
         <v-img height="100px" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
           <v-overlay class="align-end justify-start" absolute color="#000000" opacity="0.8">
-            <v-card-title>This is an about page</v-card-title>
+            <v-card-title>About the German voting</v-card-title>
           </v-overlay>
         </v-img>
 
-        <v-card-subtitle class="pb-0">About subtitle</v-card-subtitle>
+        <v-card-subtitle class="pb-0">Short summary</v-card-subtitle>
         <v-card-text class="text--primary">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          The German voting will be limited to German voters, as well as a yet undecided rank limit. Everyone can vote, but in the end, the results will be calculated from people matching the criteria.
+          I'll let everyone vote because it will be interesting to compare the different opinions in the end.<br><br>
+
+          The website was creating by hallowatcher, and the criteria/results are/were projected with the help of some big names in the German community (e.g. Dustice).
 
           <v-divider class="mt-10"></v-divider>
           <v-timeline dense>
-            <v-timeline-item>
+            <v-timeline-item fill-dot large color="red" class="font-weight-bold">
+              <template v-slot:icon>
+                <v-icon class="text-h3">mdi-information</v-icon>
+              </template>
+
               <v-row>
-                <v-col sm="2"><b>25.09.20</b></v-col>
-                <v-col>This could be a timeline of the event/page</v-col>
+                <v-col>Voting timeline</v-col>
               </v-row>
             </v-timeline-item>
-            <v-timeline-item>
+
+            <v-timeline-item color="yellow">
               <v-row>
-                <v-col sm="2"><b>02.10.20</b></v-col>
-                <v-col>This could be a timeline of the event/page</v-col>
+                <v-col sm="2"><b>24.12.20</b></v-col>
+                <v-col>Voting opens</v-col>
               </v-row>
             </v-timeline-item>
-            <v-timeline-item>
+            <v-timeline-item color="grey">
               <v-row>
-                <v-col sm="2"><b>09.10.20</b></v-col>
-                <v-col>This could be a timeline of the event/page</v-col>
+                <v-col sm="2"><b>24.01.21</b></v-col>
+                <v-col>Voting ends</v-col>
               </v-row>
             </v-timeline-item>
-            <v-timeline-item>
+            <v-timeline-item color="grey">
               <v-row>
-                <v-col sm="2"><b>16.10.20</b></v-col>
-                <v-col>This could be a timeline of the event/page</v-col>
+                <v-col sm="2"><b>30.01.21</b></v-col>
+                <v-col>Results announcement</v-col>
+              </v-row>
+            </v-timeline-item>
+            <v-timeline-item color="grey">
+              <v-row>
+                <v-col sm="2"><b>10.02.21</b></v-col>
+                <v-col>Video publishing (estimated)</v-col>
               </v-row>
             </v-timeline-item>
           </v-timeline>
