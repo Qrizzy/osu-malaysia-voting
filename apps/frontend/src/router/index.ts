@@ -1,8 +1,27 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
+import NotFound from '../views/NotFound.vue';
+import Auth from '../store/modules/auth';
 
 Vue.use(VueRouter);
+
+function loggedInGuard(to, from, next) {
+  const loggedInPromise = new Promise(function (resolve) {
+    (function waitForLoggedInCheck() {
+      if (Auth.state.checked) return resolve();
+      setTimeout(waitForLoggedInCheck, 30);
+    })();
+  });
+
+  loggedInPromise.then(() => {
+    if (!Auth.state.loggedIn) {
+      next({ name: 'Home' });
+    }
+
+    next();
+  });
+}
 
 const routes: Array<RouteConfig> = [
   {
@@ -22,6 +41,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/vote',
     name: 'Vote',
+    beforeEnter: loggedInGuard,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -30,12 +50,17 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/past',
-    name: 'Past results',
+    name: 'PastResults',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "past" */ '../views/Past.vue')
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound
   }
 ];
 

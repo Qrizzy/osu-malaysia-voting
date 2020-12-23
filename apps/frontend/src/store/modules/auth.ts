@@ -2,7 +2,7 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import axios from 'axios';
 
 @Module({ namespaced: true })
-class Auth extends VuexModule {
+export default class Auth extends VuexModule {
   loggedIn = false;
   loggingIn = false;
   loggingOut = false;
@@ -61,4 +61,3 @@ class Auth extends VuexModule {
     }
   }
 }
-export default Auth;
