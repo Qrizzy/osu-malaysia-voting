@@ -14,8 +14,8 @@ export class ChoiceService {
 
   async findAll(): Promise<ChoiceEntity[]> {
     return await this.choiceRepository.findAll<ChoiceEntity>({
-      attributes: ['id', 'username'],
-      order: [['username', 'ASC']]
+      attributes: ['id', 'username', 'countryRank', 'rank'],
+      order: [['countryRank', 'ASC']]
     });
   }
 
