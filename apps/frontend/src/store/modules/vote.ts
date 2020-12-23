@@ -27,6 +27,11 @@ export default class Vote extends VuexModule {
   ninth = null;
   tenth = null;
 
+  errorMessage = null;
+
+  submitting = false;
+  submitted = false;
+
   get getVote() {
     return (voteRank: number) => {
       return this[dictionary[voteRank]];
@@ -35,17 +40,56 @@ export default class Vote extends VuexModule {
 
   @Mutation
   setVote(payload: { voteRank: number, userId: number }) {
-    console.log(payload);
     this[dictionary[payload.voteRank]] = payload.userId;
+  }
+
+  @Mutation
+  setErrorMessage(message: string) {
+    this.errorMessage = message;
+  }
+
+  @Mutation
+  setSubmitting(submitting: boolean) {
+    this.submitting = submitting;
+  }
+
+  @Mutation
+  setSubmitted(submitted: boolean) {
+    this.submitted = submitted;
   }
 
   @Action
   vote(payload: { voteRank: number, userId: number }) {
     this.context.commit('setVote', payload);
+    this.context.commit('setErrorMessage', null);
   }
 
   @Action
-  submit() {
-    // Todo
+  async submit() {
+    try {
+      this.context.commit('setErrorMessage', null);
+      this.context.commit('setSubmitted', false);
+      this.context.commit('setSubmitting', true);
+
+      const votes = Object.keys(dictionary).map(e => ({ userId: this[dictionary[e]], ranking: +e }));
+      await axios.post('/api/votes', { votes });
+
+      this.context.commit('setSubmitting', false);
+      this.context.commit('setSubmitted', true);
+    } catch (e) {
+      this.context.commit('setErrorMessage', e.response?.data?.message || e.message);
+      this.context.commit('setSubmitting', false);
+    }
+  }
+
+  @Action
+  async getPreviousVotes() {
+    const votes = await axios.get('/api/votes/me');
+
+    if (votes.data && votes.data.voteList.length > 0) {
+      for (const vote of votes.data.voteList) {
+        this.context.commit('setVote', { voteRank: vote.ranking, userId: vote.choiceId });
+      }
+    }
   }
 }

@@ -6,6 +6,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProjectConfigModule } from './config.module';
 import { ChoiceModule } from './modules/choice/choice.module';
+import { VoteModule } from './modules/vote/vote.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ChoiceModule } from './modules/choice/choice.module';
     DatabaseModule,
     UserModule,
     ChoiceModule,
+    VoteModule,
     AuthModule
   ],
   controllers: [],

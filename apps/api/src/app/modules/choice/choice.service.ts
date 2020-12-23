@@ -19,6 +19,12 @@ export class ChoiceService {
     });
   }
 
+  async findByUserId(id: number): Promise<ChoiceEntity> {
+    return await this.choiceRepository.findOne({
+      where: { id }
+    });
+  }
+
   async save(choice: ChoiceEntity) {
     return await choice.save();
   }

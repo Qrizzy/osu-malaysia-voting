@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete :value="selectedChoice" solo :items="choices" color="white" item-text="username" item-value="id" :label="'#' + fieldForRank + ' German player'" @change="selectChoice">
+  <v-autocomplete :value="selectedChoice" :items="choices" color="white" item-text="username" item-value="id" :label="'#' + fieldForRank + ' German player'" @change="selectChoice">
     <template v-slot:selection="data">
       <v-avatar left size="24" class="mr-2">
         <v-img :src="'https://a.ppy.sh/' + data.item.id"></v-img>

@@ -42,10 +42,13 @@
 
 
               <div v-if="!loadingChoices && choices.length > 0">
+                <v-alert id="error" border="left" type="error" v-if="errorMessage">{{errorMessage}}</v-alert>
+                <v-alert id="success" border="left" type="success" v-if="submitted">Submitted successfully! If you submit again, it will replace your previous submission.</v-alert>
+
                 <ChoiceSelect v-for="index in 10" :key="index" :choices="choices" :selected-choice="getVote(index)" :field-for-rank="index" @select-choice="selectChoice($event, index)"></ChoiceSelect>
 
-                <div class="d-flex align-center justify-end">
-                  <v-btn color="pink">Submit</v-btn>
+                <div class="d-flex align-center justify-end" @click="submit">
+                  <v-btn color="pink" :loading="submitting">Submit</v-btn>
                 </div>
               </div>
             </v-card-text>
@@ -72,23 +75,19 @@
     }
   })
   export default class Vote extends Vue {
-    @auth.State
-    currentUser!: any;
+    @auth.State currentUser!: any;
 
-    @choice.State
-    loadingChoices: boolean;
+    @choice.State loadingChoices: boolean;
+    @choice.State choices: any[];
+    @choice.Action getChoices!: () => void
 
-    @choice.State
-    choices: any[];
-
-    @choice.Action
-    getChoices!: () => void
-
-    @vote.Action
-    vote!: (payload: { voteRank: number, userId: number }) => void
-
-    @vote.Getter
-    getVote: (voteRank: number) => number
+    @vote.State errorMessage!: string;
+    @vote.State submitting!: boolean;
+    @vote.State submitted!: boolean;
+    @vote.Getter getVote!: (voteRank: number) => number
+    @vote.Action vote!: (payload: { voteRank: number, userId: number }) => void
+    @vote.Action submit!: () => void;
+    @vote.Action getPreviousVotes!: () => void;
 
     votingCounts = false;
     multiplier = 0;
@@ -114,7 +113,24 @@
 
     mounted() {
       this.getChoices();
+      this.getPreviousVotes();
       this.setMultiplierAndAbilityToVote();
+
+      this.$store.subscribe(action => {
+        if (action.type === 'Vote/setErrorMessage' && action.payload) {
+          // Scroll to error
+          setTimeout(() => {
+            this.$vuetify.goTo('#error', { offset: 100 });
+          }, 100);
+        }
+
+        if (action.type === 'Vote/setSubmitted' && action.payload) {
+          // Success
+          setTimeout(() => {
+            this.$vuetify.goTo('#success', { offset: 100 });
+          }, 100);
+        }
+      });
     }
 
     setMultiplierAndAbilityToVote() {

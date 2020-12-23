@@ -6,6 +6,8 @@ import { Sequelize } from 'sequelize-typescript';
 // Entities
 import { UserEntity } from './modules/user/user.entity';
 import { ChoiceEntity } from './modules/choice/choice.entity';
+import { VoteEntity } from './modules/vote/vote.entity';
+import { VoteCollectionEntity } from './modules/vote/vote-collection.entity';
 
 const databaseProviders: Provider[] = [{
   provide: 'SEQUELIZE',
@@ -32,7 +34,9 @@ const databaseProviders: Provider[] = [{
 
     sequelize.addModels([
       UserEntity,
-      ChoiceEntity
+      ChoiceEntity,
+      VoteEntity,
+      VoteCollectionEntity
     ]);
 
     await sequelize.sync({ alter: true });
