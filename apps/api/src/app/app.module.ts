@@ -5,6 +5,7 @@ import { DatabaseModule } from './database.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProjectConfigModule } from './config.module';
+import { ChoiceModule } from './modules/choice/choice.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ProjectConfigModule } from './config.module';
     }),
     DatabaseModule,
     UserModule,
+    ChoiceModule,
     AuthModule
   ],
   controllers: [],
