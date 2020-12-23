@@ -15,7 +15,10 @@
           <v-avatar size="36">
             <img :src="'https://a.ppy.sh/' + user.osuId" alt="John">
           </v-avatar>
-          <span class="ml-3">{{ user.username }}</span>
+
+          <v-badge bordered color="red" content="owc" inline :value="user.owc ? user.owc : false">
+            <span class="ml-3">{{ user.username }}</span>
+          </v-badge>
         </td>
         <td style="text-align: right;">
           <v-btn x-small text @click="openProfile(user.osuId)">profile</v-btn>
@@ -38,6 +41,7 @@
   export interface User {
     rank: number;
     osuId: number;
+    owc?: boolean;
     username: string;
   }
 
