@@ -1,5 +1,6 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import axios from 'axios';
+import * as moment from 'moment';
 
 const dictionary = {
   1: 'first',
@@ -32,6 +33,8 @@ export default class Vote extends VuexModule {
   submitting = false;
   submitted = false;
 
+  lastSaved = null;
+
   get getVote() {
     return (voteRank: number) => {
       return this[dictionary[voteRank]];
@@ -58,6 +61,11 @@ export default class Vote extends VuexModule {
     this.submitted = submitted;
   }
 
+  @Mutation
+  setLastSaved(lastSavedDate: moment.Moment) {
+    this.lastSaved = lastSavedDate;
+  }
+
   @Action
   vote(payload: { voteRank: number, userId: number }) {
     this.context.commit('setVote', payload);
@@ -76,6 +84,7 @@ export default class Vote extends VuexModule {
 
       this.context.commit('setSubmitting', false);
       this.context.commit('setSubmitted', true);
+      this.context.commit('setLastSaved', moment());
     } catch (e) {
       this.context.commit('setErrorMessage', e.response?.data?.message || e.message);
       this.context.commit('setSubmitting', false);
@@ -90,6 +99,8 @@ export default class Vote extends VuexModule {
       for (const vote of votes.data.voteList) {
         this.context.commit('setVote', { voteRank: vote.ranking, userId: vote.choiceId });
       }
+
+      this.context.commit('setLastSaved', moment(votes.data.updatedAt));
     }
   }
 }

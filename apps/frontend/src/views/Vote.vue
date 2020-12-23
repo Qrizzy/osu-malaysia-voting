@@ -47,8 +47,9 @@
 
                 <ChoiceSelect v-for="index in 10" :key="index" :choices="choices" :selected-choice="getVote(index)" :field-for-rank="index" @select-choice="selectChoice($event, index)"></ChoiceSelect>
 
-                <div class="d-flex align-center justify-end" @click="submit">
-                  <v-btn color="pink" :loading="submitting">Submit</v-btn>
+                <div class="d-flex align-center justify-end">
+                  <span class="font-weight-bold grey--text mr-5" v-if="lastSaved">Last saved {{ lastSaved.fromNow() }}</span>
+                  <v-btn @click="submit" color="pink" :loading="submitting">Submit</v-btn>
                 </div>
               </div>
             </v-card-text>
@@ -62,6 +63,7 @@
 <script lang="ts">
   import Component from 'vue-class-component';
   import Vue from 'vue';
+  import * as moment from 'moment';
   import { namespace } from 'vuex-class';
   import ChoiceSelect from '../components/ChoiceSelect.vue';
 
@@ -84,6 +86,7 @@
     @vote.State errorMessage!: string;
     @vote.State submitting!: boolean;
     @vote.State submitted!: boolean;
+    @vote.State lastSaved!: moment.Moment;
     @vote.Getter getVote!: (voteRank: number) => number
     @vote.Action vote!: (payload: { voteRank: number, userId: number }) => void
     @vote.Action submit!: () => void;
