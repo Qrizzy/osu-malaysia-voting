@@ -10,10 +10,10 @@
 
         <v-card-subtitle class="pb-0">Short summary</v-card-subtitle>
         <v-card-text class="text--primary">
-          The German voting will be limited to German voters, as well as a yet undecided rank limit. Everyone can vote, but in the end, the results will be calculated from people matching the criteria.
+          The German voting will be limited to German voters, as well as a top 1000 country limit. Everyone can vote, but in the end, the results will be calculated from people matching the criteria.
           I'll let everyone vote because it will be interesting to compare the different opinions in the end.<br><br>
 
-          The website was creating by hallowatcher, and the criteria/results are/were projected with the help of some big names in the German community (e.g. Dustice).
+          The website was created by hallowatcher.
 
           <v-divider class="mt-10"></v-divider>
           <v-timeline dense>
