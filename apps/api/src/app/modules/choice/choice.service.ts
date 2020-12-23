@@ -46,28 +46,5 @@ export class ChoiceService {
       delay(2000),
       map(e => e.data[0])
     );
-
-    // return new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     request.post(
-    //       'https://osu.ppy.sh/api/get_user',
-    //       {
-    //         form: {
-    //           k: v1token,
-    //           u: fixedUser
-    //         },
-    //         json: true
-    //       },
-    //       (error, message, body) => {
-    //         if (error) {
-    //           console.error(error);
-    //           return reject(error);
-    //         }
-    //
-    //         resolve(body[0]);
-    //       }
-    //     );
-    //   }, 1000);
-    // });
   }
 }
