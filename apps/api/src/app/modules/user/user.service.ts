@@ -38,6 +38,7 @@ export class UserService {
     user.username = apiUser.username;
     user.avatarUrl = apiUser.avatar_url;
     user.rank = apiUser.statistics ? apiUser.statistics.pp_rank : null;
+    user.countryRank = apiUser.statistics ? apiUser.statistics.rank.country : null;
     user.country = apiUser.country ? apiUser.country.code : null;
 
     return await this.save(user);

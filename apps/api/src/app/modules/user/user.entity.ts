@@ -18,6 +18,9 @@ export class UserEntity extends Model {
   @Column
   rank: number;
 
+  @Column
+  countryRank: number;
+
   @Default(false)
   @Column
   admin: boolean;
