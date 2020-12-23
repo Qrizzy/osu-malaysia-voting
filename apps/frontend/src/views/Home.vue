@@ -14,7 +14,7 @@
             </div>
 
             <div class="text-center text-md-left">
-              <v-btn large to="/about" color="pink" v-if="!loggedIn" @click="logIn()" :loading="loggingIn">
+              <v-btn large color="pink" v-if="!loggedIn" @click="logIn()" :loading="loggingIn">
                 Log in to start voting
               </v-btn>
             </div>
