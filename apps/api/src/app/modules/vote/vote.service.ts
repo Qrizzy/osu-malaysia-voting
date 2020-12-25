@@ -17,6 +17,10 @@ export class VoteService {
     });
   }
 
+  async findCollectionCount() {
+    return await this.voteCollectionRepository.findAndCountAll();
+  }
+
   async findCollectionForUser(userId: number): Promise<VoteCollectionEntity> {
     return await this.voteCollectionRepository.findOne({
       where: {

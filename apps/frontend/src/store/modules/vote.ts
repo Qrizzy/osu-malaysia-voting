@@ -34,6 +34,7 @@ export default class Vote extends VuexModule {
   submitted = false;
 
   lastSaved = null;
+  totalVotes = 0;
 
   get getVote() {
     return (voteRank: number) => {
@@ -66,10 +67,23 @@ export default class Vote extends VuexModule {
     this.lastSaved = lastSavedDate;
   }
 
+  @Mutation
+  setTotalVotes(totalVotes: number) {
+    this.totalVotes = totalVotes;
+  }
+
   @Action
   vote(payload: { voteRank: number, userId: number }) {
     this.context.commit('setVote', payload);
     this.context.commit('setErrorMessage', null);
+  }
+
+  @Action
+  async getTotalVotes() {
+    try {
+      const result = await axios.get('/api/votes');
+      this.context.commit('setTotalVotes', result.data.totalVotes);
+    } catch {}
   }
 
   @Action

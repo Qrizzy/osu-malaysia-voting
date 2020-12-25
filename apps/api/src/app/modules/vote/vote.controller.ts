@@ -9,7 +9,6 @@ import { VoteCollectionEntity } from './vote-collection.entity';
 import { AuthenticatedRequest } from '../auth/authenticated-request';
 
 @Controller('/votes')
-@UseGuards(LoggedInGuard)
 export class VoteController {
   year = 2020;
 
@@ -19,7 +18,17 @@ export class VoteController {
     private voteService: VoteService
   ) {}
 
+  @Get()
+  async getTotal() {
+    try {
+      return { totalVotes: (await this.voteService.findCollectionCount()).count };
+    } catch {
+      throw new BadRequestException();
+    }
+  }
+
   @Get('/me')
+  @UseGuards(LoggedInGuard)
   async getMyVotes(@Req() req: AuthenticatedRequest) {
     try {
       return await this.voteService.findCollectionForUser(req.user.id);
@@ -29,6 +38,7 @@ export class VoteController {
   }
 
   @Post()
+  @UseGuards(LoggedInGuard)
   async submitVotes(@Req() req: AuthenticatedRequest, @Body() dto: SubmitVoteDto) {
     try {
       const user = req.user;

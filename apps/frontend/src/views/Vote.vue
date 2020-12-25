@@ -28,9 +28,9 @@
                     <span>Logged in as <b>{{ currentUser.username }}</b></span>
 
                     <v-chip-group>
-                      <v-chip small v-if="votingCounts">Voting counts</v-chip>
-                      <v-chip small v-if="!votingCounts">Voting will not count</v-chip>
-                      <v-chip small v-if="votingCounts">Multiplier x{{multiplier}}</v-chip>
+                      <v-chip small v-if="votingCounts" color="success">Voting counts</v-chip>
+                      <v-chip small v-if="!votingCounts" color="amber">Voting will not count</v-chip>
+                      <v-chip small v-if="votingCounts" color="primary">Multiplier <b class="ml-1">x{{multiplier}}</b></v-chip>
                     </v-chip-group>
                   </v-list-item-content>
                 </v-list-item>
@@ -49,7 +49,7 @@
 
                 <div class="d-flex align-center justify-end">
                   <span class="font-weight-bold grey--text mr-5" v-if="lastSaved">Last saved {{ lastSaved.fromNow() }}</span>
-                  <v-btn @click="submit" color="pink" :loading="submitting">Submit</v-btn>
+                  <v-btn @click="submit" color="primary" :loading="submitting">Submit</v-btn>
                 </div>
               </div>
             </v-card-text>
