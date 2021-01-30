@@ -33,21 +33,21 @@
                 <v-col>Voting opens</v-col>
               </v-row>
             </v-timeline-item>
-            <v-timeline-item color="grey">
+            <v-timeline-item color="yellow">
               <v-row>
                 <v-col sm="2"><b>24.01.21</b></v-col>
                 <v-col>Voting ends</v-col>
               </v-row>
             </v-timeline-item>
-            <v-timeline-item color="grey">
+            <v-timeline-item color="yellow">
               <v-row>
-                <v-col sm="2"><b>30.01.21</b></v-col>
-                <v-col>Results announcement</v-col>
+                <v-col sm="2"><b>31.01.21</b></v-col>
+                <v-col>Video production starts</v-col>
               </v-row>
             </v-timeline-item>
             <v-timeline-item color="grey">
               <v-row>
-                <v-col sm="2"><b>10.02.21</b></v-col>
+                <v-col sm="2"><b>28.02.21</b></v-col>
                 <v-col>Video publishing (estimated)</v-col>
               </v-row>
             </v-timeline-item>

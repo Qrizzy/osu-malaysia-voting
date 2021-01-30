@@ -11,23 +11,13 @@
               hallowatcher's yearly German top 10 voting for the year 2020
             </div>
             <div class="grey--text subtitle-2 mb-4 text-center text-md-left">
-              Currently at <b>{{ totalVotes }}</b> submissions.
+              <b>{{ totalVotes }}</b> submissions were recorded.
             </div>
           </div>
 
           <div class="d-flex mt-3 align-center justify-center">
-            <v-btn large to="/vote" color="red" v-if="loggedIn">
-              Start voting
-            </v-btn>
-
-            <v-btn
-              large
-              color="pink"
-              v-if="!loggedIn"
-              @click="logIn()"
-              :loading="loggingIn"
-            >
-              Log in to start voting
+            <v-btn large to="/past" color="red">
+              Past results
             </v-btn>
 
             <v-btn large to="/about" class="ml-3" text>

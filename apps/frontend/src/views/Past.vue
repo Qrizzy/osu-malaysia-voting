@@ -74,7 +74,7 @@
             <v-card-title>2020 rankings</v-card-title>
             <v-card-subtitle>Voting by hallowatcher.</v-card-subtitle>
 
-            <div class="headline grey--text d-flex align-center justify-center my-10 mx-5">The data for this year has not been projected yet. Make sure to cast your votes before the voting period ends!</div>
+            <div class="headline grey--text d-flex align-center justify-center my-10 mx-5">The voting period has ended. The results will be released alongside the video!</div>
           </v-tab-item>
         </v-tabs-items>
       </v-card>
