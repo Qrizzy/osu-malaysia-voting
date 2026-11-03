@@ -20,9 +20,9 @@ const databaseProviders: Provider[] = [{
       username: configService.get<string>('DB_USER'),
       password: configService.get<string>('DB_PASS'),
       database: configService.get<string>('DB_DATABASE'),
-      timezone: 'Etc/GMT0',
+      timezone: '+00:00',
       dialectOptions: {
-        timezone: 'Etc/GMT0',
+        timezone: '+00:00',
       },
       define: {
         charset: 'utf8mb4',

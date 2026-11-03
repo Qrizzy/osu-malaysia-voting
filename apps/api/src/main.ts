@@ -20,7 +20,7 @@ async function bootstrap() {
   const RedisStore = connectRedis(session);
   const redisClient = redis.createClient({
     host: configService.get<string>('REDIS_HOST'),
-    port: configService.get<number>('REDIS_HOST'),
+    port: configService.get<number>('REDIS_PORT'),
     password: configService.get<string>('REDIS_PASS')
   });
 
