@@ -2,17 +2,17 @@
   <v-row class="past">
     <v-col md="6" offset-md="3">
       <v-card v-if="currentUser">
-        <v-card-title>2020 Voting</v-card-title>
-        <v-card-subtitle>Vote for the German top 10 of 2020</v-card-subtitle>
+        <v-card-title>2026 Voting</v-card-title>
+        <v-card-subtitle>Vote for the Malaysian top 10 of 2026</v-card-subtitle>
 
         <v-card-text>
 
           <v-card>
             <v-card-text>
               <h3>Voting format</h3>
-              <p>This year's voting will only account for the German voters in the top 1000 of Germany. International votes will still be possible to have a comparison in the end, but will not count towards the final rankings.</p>
+              <p>This year's voting will only account for the Malaysian voters in the top 1000 of Malaysia. International votes will still be possible to have a comparison in the end, but will not count towards the final rankings.</p>
               <p>The point distribution will be as follows: 7, 6, 5, 5, 4, 4, 3, 3, 2, 1</p>
-              <p>The point multiplier will apply as follows: 1 - 10 DE x5, 11 - 25 DE x4, 26 - 50 DE x3, 50 - 100 DE x2, > 101 DE x1</p>
+              <p>The point multiplier will apply as follows: 1 - 10 MY x5, 11 - 25 MY x4, 26 - 50 MY x3, 50 - 100 MY x2, > 101 MY x1</p>
             </v-card-text>
           </v-card>
 
@@ -94,7 +94,7 @@
 
     votingCounts = false;
     multiplier = 0;
-    countryCode = 'DE';
+    countryCode = 'MY';
     countryRankLimit = 1000;
 
     // Votes

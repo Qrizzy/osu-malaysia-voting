@@ -1,5 +1,5 @@
 <template>
-  <v-autocomplete :value="selectedChoice" :items="choices" color="white" item-text="username" item-value="id" :label="'#' + fieldForRank + ' German player'" @change="selectChoice">
+  <v-autocomplete :value="selectedChoice" :items="choices" color="white" item-text="username" item-value="id" :label="'#' + fieldForRank + ' Malaysian player'" @change="selectChoice">
     <template v-slot:selection="data">
       <v-avatar left size="24" class="mr-2">
         <v-img :src="'https://a.ppy.sh/' + data.item.id"></v-img>
@@ -13,11 +13,11 @@
       </template>
       <template v-else>
         <v-list-item-avatar>
-          <img alt="DE" :src="'https://a.ppy.sh/' + data.item.id">
+          <img alt="MY" :src="'https://a.ppy.sh/' + data.item.id">
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-html="data.item.username"></v-list-item-title>
-          <v-list-item-subtitle>#{{data.item.rank}} Worldwide, #{{data.item.countryRank}} DE</v-list-item-subtitle>
+          <v-list-item-subtitle>#{{data.item.rank}} Worldwide, #{{data.item.countryRank}} MY</v-list-item-subtitle>
         </v-list-item-content>
       </template>
     </template>

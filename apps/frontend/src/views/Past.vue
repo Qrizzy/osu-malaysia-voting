@@ -16,6 +16,7 @@
           <v-tab href="#2018">2018</v-tab>
           <v-tab href="#2019">2019</v-tab>
           <v-tab href="#2020">2020</v-tab>
+          <v-tab href="#2026">2026</v-tab>
         </v-tabs>
       </v-card>
 
@@ -75,6 +76,13 @@
             <v-card-subtitle>Voting by hallowatcher.</v-card-subtitle>
 
             <div class="headline grey--text d-flex align-center justify-center my-10 mx-5">The voting period has ended. The results will be released alongside the video!</div>
+          </v-tab-item>
+
+          <v-tab-item value="2026">
+            <v-card-title>2026 rankings</v-card-title>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+
+            <div class="headline grey--text d-flex align-center justify-center my-10 mx-5">The data for this year has not been projected yet. Make sure to cast your votes before the voting period ends!</div>
           </v-tab-item>
         </v-tabs-items>
       </v-card>

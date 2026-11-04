@@ -44,15 +44,18 @@ export class AuthModule implements NestModule {
         async (accessToken, refreshToken, profileEmpty, cb) => {
           const apiUser: any = await this.getProfile(accessToken).toPromise();
 
-          // Fetch german leaderboard if user = hallowatcher
-          if (apiUser.username === 'hallowatcher') {
-            const choices = await this.choiceService.findAll();
+          // Fetch Malaysian leaderboard if choices are empty or user is admin
+          const choices = await this.choiceService.findAll();
+          const shouldFetchChoices = choices.length === 0 || apiUser.username === process.env.ADMIN_USERNAME || apiUser.username === 'hallowatcher';
 
-            if (choices.length === 0) {
-              const germanLeaderboardPageOne = (await this.getGermanLeaderboard(accessToken, 1).toPromise()).ranking;
-              const germanLeaderboardPageTwo = (await this.getGermanLeaderboard(accessToken, 2).toPromise()).ranking;
-              this.saveChoices(germanLeaderboardPageOne, 1);
-              this.saveChoices(germanLeaderboardPageTwo, 2);
+          if (shouldFetchChoices) {
+            try {
+              const malaysiaLeaderboardPageOne = (await this.getMalaysiaLeaderboard(accessToken, 1).toPromise()).ranking;
+              const malaysiaLeaderboardPageTwo = (await this.getMalaysiaLeaderboard(accessToken, 2).toPromise()).ranking;
+              this.saveChoices(malaysiaLeaderboardPageOne, 1);
+              this.saveChoices(malaysiaLeaderboardPageTwo, 2);
+            } catch (err) {
+              // Silently handle if rate limited or API error
             }
           }
 
@@ -96,14 +99,19 @@ export class AuthModule implements NestModule {
     );
   }
 
-  getGermanLeaderboard(token: string, page: number) {
-    return this.httpService.get(`https://osu.ppy.sh/api/v2/rankings/osu/performance?country=DE&cursor[page]=${page}`, {
+  getMalaysiaLeaderboard(token: string, page: number) {
+    const country = process.env.VOTING_COUNTRY || 'MY';
+    return this.httpService.get(`https://osu.ppy.sh/api/v2/rankings/osu/performance?country=${country}&cursor[page]=${page}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }).pipe(
       map(e => e.data)
     );
+  }
+
+  getGermanLeaderboard(token: string, page: number) {
+    return this.getMalaysiaLeaderboard(token, page);
   }
 
   saveChoices(choices: any[], page: number) {

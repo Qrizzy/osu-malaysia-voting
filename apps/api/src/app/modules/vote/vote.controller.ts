@@ -10,7 +10,7 @@ import { AuthenticatedRequest } from '../auth/authenticated-request';
 
 @Controller('/votes')
 export class VoteController {
-  year = 2020;
+  year = process.env.VOTING_YEAR ? parseInt(process.env.VOTING_YEAR, 10) : 2026;
 
   constructor(
     private choiceService: ChoiceService,

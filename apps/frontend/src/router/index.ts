@@ -38,13 +38,13 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
-  // {
-  //   path: '/vote',
-  //   name: 'Vote',
-  //   beforeEnter: loggedInGuard,
-  //   component: () =>
-  //     import(/* webpackChunkName: "vote" */ '../views/Vote.vue')
-  // },
+  {
+    path: '/vote',
+    name: 'Vote',
+    beforeEnter: loggedInGuard,
+    component: () =>
+      import(/* webpackChunkName: "vote" */ '../views/Vote.vue')
+  },
   {
     path: '/past',
     name: 'PastResults',

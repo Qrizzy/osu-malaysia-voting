@@ -32,7 +32,12 @@ import * as Joi from '@hapi/joi';
         OSU_CLIENT_ID: Joi.number().required(),
         OSU_CLIENT_SECRET: Joi.string().required(),
         OSU_CALLBACK_URL: Joi.string().required(),
-        OSU_API_KEY: Joi.string()
+        OSU_API_KEY: Joi.string(),
+
+        // Voting Configuration
+        VOTING_COUNTRY: Joi.string().default('MY'),
+        VOTING_YEAR: Joi.number().default(2026),
+        ADMIN_USERNAME: Joi.string().allow('', null)
       })
     })
   ]
