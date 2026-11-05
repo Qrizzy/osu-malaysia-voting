@@ -10,11 +10,11 @@
       <v-divider></v-divider>
 
       <v-card-text class="pb-0">
-        Created by <strong>hallowatcher</strong>.
+        {{ new Date().getFullYear() }} – Created by <strong>Chiyuu</strong>
       </v-card-text>
 
       <v-card-text class="pt-0">
-        {{ new Date().getFullYear() }} – plz enjoy game
+        Cloned from <strong>hallowatcher</strong>'s repo.
       </v-card-text>
     </v-card>
   </v-footer>

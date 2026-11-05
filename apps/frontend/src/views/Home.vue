@@ -5,7 +5,7 @@
         <v-overlay absolute color="#000000" opacity="0.8">
           <div class="d-flex flex-column align-center justify-center">
             <h1 class="white--text mb-2 display-2 text-center text-md-left">
-              Malaysian top 10 voting
+              osu! Malaysia Top 10 Players 2026
             </h1>
             <div class="white--text subtitle-1 text-center text-md-left">
               osu! Malaysia yearly top 10 voting for the year 2026

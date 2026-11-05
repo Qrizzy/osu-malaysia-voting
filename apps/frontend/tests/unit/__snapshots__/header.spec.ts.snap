@@ -3,7 +3,7 @@
 exports[`Header.vue renders correctly when logged in 1`] = `
 <header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
   <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.svg" alt="Logo" class="logo mr-2">
-    <div class="v-toolbar__title">Malaysian top 10 voting</div>
+    <div class="v-toolbar__title">osu! Malaysia Top 10 Players 2026</div>
     <div class="spacer"></div>
     <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a> <a href="#/vote" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Vote</span></a> <a href="#/past" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Past results</span></a>
       <hr role="separator" aria-orientation="vertical" class="v-divider v-divider--vertical theme--light">
@@ -23,7 +23,7 @@ exports[`Header.vue renders correctly when logged in 1`] = `
 exports[`Header.vue renders correctly when logged out 1`] = `
 <header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
   <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.svg" alt="Logo" class="logo mr-2">
-    <div class="v-toolbar__title">Malaysian top 10 voting</div>
+    <div class="v-toolbar__title">osu! Malaysia Top 10 Players 2026</div>
     <div class="spacer"></div>
     <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a>
       <!----> <a href="#/past" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Past results</span></a>
@@ -41,7 +41,7 @@ exports[`Header.vue renders correctly when logged out 1`] = `
 exports[`Header.vue renders correctly when logging in 1`] = `
 <header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
   <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.svg" alt="Logo" class="logo mr-2">
-    <div class="v-toolbar__title">Malaysian top 10 voting</div>
+    <div class="v-toolbar__title">osu! Malaysia Top 10 Players 2026</div>
     <div class="spacer"></div>
     <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a>
       <!----> <a href="#/past" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Past results</span></a>
@@ -59,7 +59,7 @@ exports[`Header.vue renders correctly when logging in 1`] = `
 exports[`Header.vue renders correctly when logging out 1`] = `
 <header class="v-sheet theme--light v-toolbar v-toolbar--dense v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow" style="height: 48px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px;">
   <div class="v-toolbar__content" style="height: 48px;"><img src="../assets/logo.svg" alt="Logo" class="logo mr-2">
-    <div class="v-toolbar__title">Malaysian top 10 voting</div>
+    <div class="v-toolbar__title">osu! Malaysia Top 10 Players 2026</div>
     <div class="spacer"></div>
     <div class="v-toolbar__items nav hidden-sm-and-down"><a href="#/" aria-current="page" class="v-btn--active v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Home</span></a> <a href="#/about" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">About</span></a> <a href="#/vote" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Vote</span></a> <a href="#/past" class="v-btn v-btn--flat v-btn--router v-btn--text theme--light v-size--default"><span class="v-btn__content">Past results</span></a>
       <hr role="separator" aria-orientation="vertical" class="v-divider v-divider--vertical theme--light">

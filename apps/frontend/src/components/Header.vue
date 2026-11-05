@@ -1,7 +1,7 @@
 <template>
   <v-app-bar fixed elevate-on-scroll dense app>
     <img src="../assets/logo.svg" alt="Logo" class="logo mr-2">
-    <v-toolbar-title>Malaysian top 10 voting</v-toolbar-title>
+    <v-toolbar-title>osu! Malaysia Top 10 Players 2026</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
