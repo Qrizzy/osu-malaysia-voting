@@ -35,77 +35,288 @@
 
           <v-tab-item value="2014">
             <v-card-title>2014 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/605973" target="_blank" class="white--text font-weight-bold">jerry</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/263125?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2014']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2015">
             <v-card-title>2015 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/3633477" target="_blank" class="white--text font-weight-bold">TequilaWolf</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/388014?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=0r_D1VU84z0" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(3995630)">Rampax</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2015']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2016">
             <v-card-title>2016 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                24 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                25 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold">ffstar</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/527098?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=h8v-7SgF7ik" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(2676512)">Ex6TenZ</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2016']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2017">
             <v-card-title>2017 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                38 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                22 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold">ffstar</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/668510?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=4dcuNpnVazU" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(2676512)">NazzzF</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2017']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2018">
             <v-card-title>2018 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                28 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                43 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/4777134" target="_blank" class="white--text font-weight-bold">Jeffrey</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/829895?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=1F3EeUJeWvM" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by SolarFox
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2018']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2019">
             <v-card-title>2019 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                44 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                31 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/6088976" target="_blank" class="white--text font-weight-bold">Tzero</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/993736?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=ymqPuTZ-YmA" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(7062729)">Koyaiba</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2019']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2020">
             <v-card-title>2020 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                62 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                30 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/13600612" target="_blank" class="white--text font-weight-bold">Its Not Marvin</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1186758?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=EqkJv1CdBxE" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(7062729)">Koyaiba</span>&nbsp;assisted by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(10178187)">FaithInOsu</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2020']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2021">
             <v-card-title>2021 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                58 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                30 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/8691555" target="_blank" class="white--text font-weight-bold">Sonic-</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1473515?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=jx7TEE_iu_k" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(6231292)">LouisZpro</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2021']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2022">
             <v-card-title>2022 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                35 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                19 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/6231292" target="_blank" class="white--text font-weight-bold">LouisZpro</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1686135?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=edmskQqokJ4&t=1396s" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(6231292)">LouisZpro</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2022']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2024">
             <v-card-title>2024 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting. Video: <a href="https://www.youtube.com/watch?v=Hg7mYpgE4cM" target="_blank">https://www.youtube.com/watch?v=Hg7mYpgE4cM</a></v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                29 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                15 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold">Chiyuu</a>&nbsp;&amp;&nbsp;<a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2016439?n=1" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=Hg7mYpgE4cM" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(8226107)">Chiyuu</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2024']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2025">
             <v-card-title>2025 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting. Video: <a href="https://www.youtube.com/watch?v=r0tE1mw-XLI" target="_blank">https://www.youtube.com/watch?v=r0tE1mw-XLI</a></v-card-subtitle>
+            <v-card-subtitle class="d-flex flex-wrap align-center">
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-vote</v-icon>
+                71 voters
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="grey darken-3">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                39 nominees
+              </v-chip>
+              <v-chip small class="mr-2 mb-2" color="blue-grey darken-3">
+                <v-icon left x-small>mdi-account-star</v-icon>
+                Hosted by&nbsp;<a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold">Chiyuu</a>&nbsp;&amp;&nbsp;<a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a>
+              </v-chip>
+              <v-btn small color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2156052" target="_blank">
+                <v-icon left small>mdi-forum</v-icon>
+                Forum Post
+              </v-btn>
+              <v-btn small color="red darken-2" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=r0tE1mw-XLI" target="_blank">
+                <v-icon left small>mdi-youtube</v-icon>
+                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(8226107)">Chiyuu</span>
+              </v-btn>
+            </v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2025']"></Leaderboard>
           </v-tab-item>
@@ -134,6 +345,11 @@
   })
   export default class Past extends Vue {
     tab = '2025';
+
+    openProfile(osuId: number) {
+      window.open(`https://osu.ppy.sh/users/${osuId}`, '_blank');
+    }
+
     leaderboards = {
       '2025': [{
         rank: 1,
