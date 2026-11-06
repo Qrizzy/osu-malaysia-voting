@@ -77,14 +77,15 @@
                     <span>Logged in as <b>{{ currentUser.username }}</b></span>
 
                     <v-chip-group>
-                      <v-chip small color="success" v-if="isVotingOpen">Eligible to vote</v-chip>
-                      <v-chip small color="warning" v-else>{{ hasVotingEnded ? 'Voting closed' : 'Voting opens 30.11.2026' }}</v-chip>
+                      <v-chip small color="success" v-if="isVotingOpen || isDev">Eligible to vote</v-chip>
+                      <v-chip small color="purple" dark v-if="isDev && !isVotingOpen">Dev Access (Bypassed Date Lock)</v-chip>
+                      <v-chip small color="warning" v-if="!isVotingOpen && !isDev">{{ hasVotingEnded ? 'Voting closed' : 'Voting opens 30.11.2026' }}</v-chip>
                     </v-chip-group>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
 
-              <v-alert border="left" type="info" class="my-4" v-if="!isVotingOpen">
+              <v-alert border="left" type="info" class="my-4" v-if="!isVotingOpen && !isDev">
                 <template v-if="hasVotingEnded">
                   Voting for 2026 ended on <b>30.12.2026</b>. Thank you for participating!
                 </template>
@@ -121,6 +122,85 @@
               </template>
             </v-card-text>
           </v-card>
+
+          <!-- Dev Access Panel: Live Voting Progress & Rankings -->
+          <v-card class="mt-6" v-if="isDev">
+            <v-card-title class="d-flex align-center">
+              <v-icon left color="purple lighten-2">mdi-shield-crown</v-icon>
+              <span>Dev Panel: Live Voting Progress &amp; Rankings</span>
+              <v-spacer></v-spacer>
+              <v-btn small rounded outlined color="purple lighten-2" class="text-none" @click="fetchDevProgress" :loading="loadingDevProgress">
+                <v-icon left small>mdi-refresh</v-icon>
+                Refresh
+              </v-btn>
+            </v-card-title>
+            <v-card-subtitle class="d-flex flex-wrap align-center mt-1">
+              <v-chip small outlined color="grey lighten-1" class="mr-2 mb-2">
+                <v-icon left x-small>mdi-database</v-icon>
+                {{ choices ? choices.length : 0 }} eligible candidates loaded
+              </v-chip>
+              <v-chip small outlined color="grey lighten-1" class="mr-2 mb-2" v-if="devProgress">
+                <v-icon left x-small>mdi-vote</v-icon>
+                {{ devProgress.totalVoters }} voters
+              </v-chip>
+              <v-chip small outlined color="grey lighten-1" class="mr-2 mb-2" v-if="devProgress">
+                <v-icon left x-small>mdi-account-group</v-icon>
+                {{ devProgress.totalNominees }} nominees voted
+              </v-chip>
+            </v-card-subtitle>
+
+            <v-card-text>
+              <div v-if="loadingDevProgress" class="d-flex justify-center my-4">
+                <v-progress-circular indeterminate color="purple lighten-2"></v-progress-circular>
+              </div>
+              <div v-else-if="!devProgress || !devProgress.standings || devProgress.standings.length === 0" class="grey--text text-center my-4">
+                No votes have been submitted for 2026 yet. Submit a test ballot above to preview live rankings!
+              </div>
+              <v-simple-table v-else dense>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">#</th>
+                      <th class="text-left">Player</th>
+                      <th class="text-left">Ranks</th>
+                      <th class="text-left">Trimmed Pts</th>
+                      <th class="text-left">Raw Pts</th>
+                      <th class="text-left">Votes (Breakdown)</th>
+                      <th class="text-left">Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, idx) in devProgress.standings" :key="item.osuId">
+                      <td>{{ idx + 1 }}</td>
+                      <td>
+                        <div class="d-flex align-center py-1">
+                          <v-avatar size="28" class="mr-2">
+                            <img :src="'https://a.ppy.sh/' + item.osuId" alt="avatar">
+                          </v-avatar>
+                          <a :href="'https://osu.ppy.sh/users/' + item.osuId" target="_blank" class="white--text font-weight-bold">{{ item.username }}</a>
+                        </div>
+                      </td>
+                      <td class="caption grey--text text--lighten-1">
+                        #{{ item.globalRank || '?' }} Global / #{{ item.countryRank || '?' }} MY
+                      </td>
+                      <td class="font-weight-bold">{{ item.trimmedPoints }}</td>
+                      <td>{{ item.rawPoints }}</td>
+                      <td>
+                        <v-chip x-small outlined color="grey lighten-1" class="mr-1">{{ item.voteCount }}x</v-chip>
+                        <code class="caption">{{ item.pointBreakdown }}</code>
+                      </td>
+                      <td class="caption">
+                        <div v-if="!item.remarks || item.remarks.length === 0" class="grey--text">-</div>
+                        <div v-else v-for="(rem, rIdx) in item.remarks" :key="rIdx" class="my-1">
+                          <b>{{ rem.voter }} (#{{ rem.ranking }}):</b> {{ rem.text }}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </v-card-text>
+          </v-card>
         </v-card-text>
       </v-card>
     </v-col>
@@ -130,6 +210,7 @@
 <script lang="ts">
   import Component from 'vue-class-component';
   import Vue from 'vue';
+  import axios from 'axios';
   import * as moment from 'moment';
   import { namespace } from 'vuex-class';
   import ChoiceSelect from '../components/ChoiceSelect.vue';
@@ -149,6 +230,16 @@
   export default class Vote extends Vue {
     @auth.State currentUser!: any;
 
+    devProgress: any = null;
+    loadingDevProgress = false;
+
+    get isDev(): boolean {
+      return Boolean(
+        (this.currentUser && (this.currentUser.id === 8226107 || (this.currentUser.username && this.currentUser.username.toLowerCase() === 'chiyuu'))) ||
+        (this.$route && this.$route.query && this.$route.query.dev !== undefined)
+      );
+    }
+
     get isVotingOpen(): boolean {
       const now = new Date();
       return now >= VOTING_OPEN_DATE && now <= VOTING_CLOSE_DATE;
@@ -156,6 +247,19 @@
 
     get hasVotingEnded(): boolean {
       return new Date() > VOTING_CLOSE_DATE;
+    }
+
+    async fetchDevProgress() {
+      if (!this.isDev) return;
+      this.loadingDevProgress = true;
+      try {
+        const res = await axios.get('/api/votes/dev/progress');
+        this.devProgress = res.data;
+      } catch {
+        this.devProgress = null;
+      } finally {
+        this.loadingDevProgress = false;
+      }
     }
 
     @choice.State loadingChoices: boolean;
@@ -199,6 +303,7 @@
       this.getChoices();
       this.getPreviousVotes();
       this.setMultiplierAndAbilityToVote();
+      this.fetchDevProgress();
 
       this.$store.subscribe(action => {
         if (action.type === 'Vote/setErrorMessage' && action.payload) {
@@ -209,6 +314,7 @@
         }
 
         if (action.type === 'Vote/setSubmitted' && action.payload) {
+          this.fetchDevProgress();
           // Success
           setTimeout(() => {
             this.$vuetify.goTo('#success', { offset: 100 });

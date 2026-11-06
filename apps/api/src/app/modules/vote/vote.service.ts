@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Op } from 'sequelize';
+import { ChoiceEntity } from '../choice/choice.entity';
 import { UserEntity } from '../user/user.entity';
 import { VoteCollectionEntity } from './vote-collection.entity';
 import { VoteEntity } from './vote.entity';
@@ -76,5 +77,89 @@ export class VoteService {
 
   async deleteCollection(collectionId: number): Promise<any> {
     return await this.voteCollectionRepository.destroy({ where: { id: collectionId } });
+  }
+
+  async getLiveProgress(year?: number) {
+    const collectionWhere: any = {};
+    if (year) {
+      collectionWhere.year = year;
+    }
+
+    const collections = await this.voteCollectionRepository.findAll({
+      where: Object.keys(collectionWhere).length > 0 ? collectionWhere : undefined,
+      include: [
+        {
+          model: UserEntity,
+          attributes: ['id', 'username', 'avatarUrl']
+        },
+        {
+          model: VoteEntity,
+          include: [ChoiceEntity]
+        }
+      ],
+      order: [['id', 'DESC']]
+    });
+
+    const playerStatsMap = new Map<number, {
+      osuId: number;
+      username: string;
+      globalRank: number;
+      countryRank: number;
+      pointVotes: number[];
+      remarks: { voter: string; ranking: number; text: string }[];
+    }>();
+
+    for (const col of collections) {
+      const voterName = col.user ? col.user.username : `User #${col.userId}`;
+      for (const vote of col.votes || []) {
+        if (!vote.choiceId || !vote.ranking) continue;
+        const points = Math.max(0, 11 - vote.ranking);
+        let entry = playerStatsMap.get(vote.choiceId);
+        if (!entry) {
+          entry = {
+            osuId: vote.choiceId,
+            username: vote.choice ? vote.choice.username : `Player #${vote.choiceId}`,
+            globalRank: vote.choice ? vote.choice.rank : null,
+            countryRank: vote.choice ? vote.choice.countryRank : null,
+            pointVotes: [],
+            remarks: []
+          };
+          playerStatsMap.set(vote.choiceId, entry);
+        }
+        entry.pointVotes.push(points);
+        if (vote.remarks && vote.remarks.trim()) {
+          entry.remarks.push({
+            voter: voterName,
+            ranking: vote.ranking,
+            text: vote.remarks.trim()
+          });
+        }
+      }
+    }
+
+    const standings = Array.from(playerStatsMap.values()).map(player => {
+      const sorted = [...player.pointVotes].sort((a, b) => b - a);
+      const rawPoints = sorted.reduce((sum, p) => sum + p, 0);
+      const trimmedVotes = sorted.length >= 3 ? sorted.slice(1, sorted.length - 1) : sorted;
+      const trimmedPoints = trimmedVotes.reduce((sum, p) => sum + p, 0);
+
+      return {
+        osuId: player.osuId,
+        username: player.username,
+        globalRank: player.globalRank,
+        countryRank: player.countryRank,
+        voteCount: sorted.length,
+        rawPoints,
+        trimmedPoints,
+        pointBreakdown: sorted.join('-'),
+        remarks: player.remarks
+      };
+    }).sort((a, b) => b.trimmedPoints - a.trimmedPoints || b.rawPoints - a.rawPoints);
+
+    return {
+      totalVoters: collections.length,
+      totalNominees: standings.length,
+      standings
+    };
   }
 }

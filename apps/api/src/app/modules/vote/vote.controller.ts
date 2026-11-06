@@ -37,6 +37,29 @@ export class VoteController {
     }
   }
 
+  private isDevUser(user: any): boolean {
+    if (!user) return false;
+    return (
+      user.id === 8226107 ||
+      (user.username && user.username.toLowerCase() === 'chiyuu') ||
+      (process.env.ADMIN_USERNAME && user.username === process.env.ADMIN_USERNAME)
+    );
+  }
+
+  @Get('/dev/progress')
+  @UseGuards(LoggedInGuard)
+  async getDevProgress(@Req() req: AuthenticatedRequest, @Query('year') year?: string) {
+    if (!this.isDevUser(req.user)) {
+      throw new BadRequestException('Unauthorized dev access.');
+    }
+    try {
+      const parsedYear = year ? parseInt(year, 10) : this.year;
+      return await this.voteService.getLiveProgress(parsedYear);
+    } catch {
+      throw new BadRequestException();
+    }
+  }
+
   @Get('/remarks/:choiceId')
   async getRemarksForChoice(@Param('choiceId') choiceId: string, @Query('year') year?: string) {
     try {
@@ -52,17 +75,17 @@ export class VoteController {
   @UseGuards(LoggedInGuard)
   async submitVotes(@Req() req: AuthenticatedRequest, @Body() dto: SubmitVoteDto) {
     try {
+      const user = req.user;
+      if (!user) {
+        throw new BadRequestException();
+      }
+
       const now = new Date();
       const votingOpenDate = new Date('2026-11-30T00:00:00+08:00');
       const votingCloseDate = new Date('2026-12-30T23:59:59+08:00');
 
-      if (now < votingOpenDate || now > votingCloseDate) {
+      if (!this.isDevUser(user) && (now < votingOpenDate || now > votingCloseDate)) {
         throw new BadRequestException('Voting is currently closed. Voting is open from 30.11.2026 to 30.12.2026.');
-      }
-
-      const user = req.user;
-      if (!user) {
-        throw new BadRequestException();
       }
 
       const existing = await this.voteService.findCollectionForUser(user.id);

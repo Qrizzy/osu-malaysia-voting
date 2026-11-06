@@ -16,9 +16,9 @@
           </div>
 
           <div class="d-flex mt-3 align-center justify-center">
-            <template v-if="isVotingOpen">
+            <template v-if="isVotingOpen || isDev">
               <v-btn large to="/vote" color="pink" v-if="loggedIn">
-                Start voting
+                {{ isVotingOpen ? 'Start voting' : 'Start voting (Dev)' }}
               </v-btn>
 
               <v-btn
@@ -28,7 +28,7 @@
                 @click="logIn()"
                 :loading="loggingIn"
               >
-                Log in to start voting
+                {{ isVotingOpen ? 'Log in to start voting' : 'Log in (Dev)' }}
               </v-btn>
             </template>
 
@@ -74,6 +74,9 @@ export default class Home extends Vue {
   @auth.State
   loggingIn!: boolean;
 
+  @auth.State
+  currentUser!: any;
+
   @auth.Action
   logIn!: () => void;
 
@@ -82,6 +85,13 @@ export default class Home extends Vue {
 
   @vote.Action
   getTotalVotes!: () => void;
+
+  get isDev(): boolean {
+    return Boolean(
+      (this.currentUser && (this.currentUser.id === 8226107 || (this.currentUser.username && this.currentUser.username.toLowerCase() === 'chiyuu'))) ||
+      (this.$route && this.$route.query && this.$route.query.dev !== undefined)
+    );
+  }
 
   get isVotingOpen(): boolean {
     const now = new Date();

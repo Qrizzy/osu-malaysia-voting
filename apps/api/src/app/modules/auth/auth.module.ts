@@ -46,7 +46,11 @@ export class AuthModule implements NestModule {
 
           // Fetch Malaysian leaderboard if choices are incomplete (< 150), missing global rank, or user is admin
           const choices = await this.choiceService.findAll();
-          const shouldFetchChoices = choices.length < 150 || choices.some(c => !c.rank) || apiUser.username === process.env.ADMIN_USERNAME || apiUser.username === 'hallowatcher';
+          const isAdmin = apiUser.id === 8226107 ||
+            (apiUser.username && apiUser.username.toLowerCase() === 'chiyuu') ||
+            apiUser.username === process.env.ADMIN_USERNAME ||
+            apiUser.username === 'hallowatcher';
+          const shouldFetchChoices = choices.length < 150 || choices.some(c => !c.rank) || isAdmin;
 
           if (shouldFetchChoices) {
             try {
