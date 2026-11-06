@@ -28,6 +28,19 @@ export default class Vote extends VuexModule {
   ninth = null;
   tenth = null;
 
+  remarks: { [key: number]: string } = {
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+    9: '',
+    10: ''
+  };
+
   errorMessage = null;
 
   submitting = false;
@@ -42,9 +55,20 @@ export default class Vote extends VuexModule {
     };
   }
 
+  get getRemark() {
+    return (voteRank: number) => {
+      return this.remarks[voteRank] || '';
+    };
+  }
+
   @Mutation
   setVote(payload: { voteRank: number, userId: number }) {
     this[dictionary[payload.voteRank]] = payload.userId;
+  }
+
+  @Mutation
+  setRemark(payload: { voteRank: number, remarks: string }) {
+    this.remarks = { ...this.remarks, [payload.voteRank]: payload.remarks };
   }
 
   @Mutation
@@ -79,6 +103,12 @@ export default class Vote extends VuexModule {
   }
 
   @Action
+  remark(payload: { voteRank: number, remarks: string }) {
+    this.context.commit('setRemark', payload);
+    this.context.commit('setErrorMessage', null);
+  }
+
+  @Action
   async getTotalVotes() {
     try {
       const result = await axios.get('/api/votes');
@@ -93,7 +123,11 @@ export default class Vote extends VuexModule {
       this.context.commit('setSubmitted', false);
       this.context.commit('setSubmitting', true);
 
-      const votes = Object.keys(dictionary).map(e => ({ userId: this[dictionary[e]], ranking: +e }));
+      const votes = Object.keys(dictionary).map(e => ({
+        userId: this[dictionary[e]],
+        ranking: +e,
+        remarks: this.remarks[+e] || ''
+      }));
       await axios.post('/api/votes', { votes });
 
       this.context.commit('setSubmitting', false);
@@ -112,6 +146,7 @@ export default class Vote extends VuexModule {
     if (votes.data && votes.data.voteList.length > 0) {
       for (const vote of votes.data.voteList) {
         this.context.commit('setVote', { voteRank: vote.ranking, userId: vote.choiceId });
+        this.context.commit('setRemark', { voteRank: vote.ranking, remarks: vote.remarks || '' });
       }
 
       this.context.commit('setLastSaved', moment(votes.data.updatedAt));

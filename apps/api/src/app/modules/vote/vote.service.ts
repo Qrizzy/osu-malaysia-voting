@@ -1,4 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { Op } from 'sequelize';
+import { UserEntity } from '../user/user.entity';
 import { VoteCollectionEntity } from './vote-collection.entity';
 import { VoteEntity } from './vote.entity';
 
@@ -28,6 +30,44 @@ export class VoteService {
       },
       include: [{ all: true }]
     });
+  }
+
+  async findRemarksForChoice(choiceId: number, year?: number) {
+    const collectionWhere: any = {};
+    if (year) {
+      collectionWhere.year = year;
+    }
+
+    const votes = await this.voteRepository.findAll({
+      where: {
+        choiceId,
+        remarks: {
+          [Op.and]: [
+            { [Op.ne]: null },
+            { [Op.ne]: '' }
+          ]
+        }
+      },
+      include: [{
+        model: VoteCollectionEntity,
+        where: Object.keys(collectionWhere).length > 0 ? collectionWhere : undefined,
+        include: [{
+          model: UserEntity,
+          attributes: ['id', 'username', 'avatarUrl']
+        }]
+      }],
+      order: [['ranking', 'ASC']]
+    });
+
+    return votes.map(v => ({
+      ranking: v.ranking,
+      remarks: v.remarks,
+      voter: v.voteCollection?.user ? {
+        id: v.voteCollection.user.id,
+        username: v.voteCollection.user.username,
+        avatarUrl: v.voteCollection.user.avatarUrl
+      } : null
+    }));
   }
 
   async saveCollection(collection: VoteCollectionEntity): Promise<VoteCollectionEntity> {

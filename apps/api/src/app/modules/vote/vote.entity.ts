@@ -1,5 +1,5 @@
 
-import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { ChoiceEntity } from '../choice/choice.entity';
 import { VoteCollectionEntity } from './vote-collection.entity';
 
@@ -7,6 +7,9 @@ import { VoteCollectionEntity } from './vote-collection.entity';
 export class VoteEntity extends Model {
   @Column
   ranking: number;
+
+  @Column(DataType.TEXT)
+  remarks: string;
 
   @ForeignKey(() => VoteCollectionEntity)
   @Column

@@ -92,7 +92,16 @@
                 <v-alert id="error" border="left" type="error" v-if="errorMessage">{{errorMessage}}</v-alert>
                 <v-alert id="success" border="left" type="success" v-if="submitted">Submitted successfully! If you submit again, it will replace your previous submission.</v-alert>
 
-                <ChoiceSelect v-for="index in 10" :key="index" :choices="choices" :selected-choice="getVote(index)" :field-for-rank="index" @select-choice="selectChoice($event, index)"></ChoiceSelect>
+                <ChoiceSelect
+                  v-for="index in 10"
+                  :key="index"
+                  :choices="choices"
+                  :selected-choice="getVote(index)"
+                  :remarks="getRemark(index)"
+                  :field-for-rank="index"
+                  @select-choice="selectChoice($event, index)"
+                  @update-remarks="updateRemark($event, index)"
+                ></ChoiceSelect>
 
                 <div class="d-flex align-center justify-end">
                   <span class="font-weight-bold grey--text mr-5" v-if="lastSaved">Last saved {{ lastSaved.fromNow() }}</span>
@@ -135,7 +144,9 @@
     @vote.State submitted!: boolean;
     @vote.State lastSaved!: moment.Moment;
     @vote.Getter getVote!: (voteRank: number) => number
+    @vote.Getter getRemark!: (voteRank: number) => string
     @vote.Action vote!: (payload: { voteRank: number, userId: number }) => void
+    @vote.Action remark!: (payload: { voteRank: number, remarks: string }) => void
     @vote.Action submit!: () => void;
     @vote.Action getPreviousVotes!: () => void;
 
@@ -210,6 +221,10 @@
 
     selectChoice(userId: number, voteRank: number) {
       this.vote({ voteRank, userId });
+    }
+
+    updateRemark(remarks: string, voteRank: number) {
+      this.remark({ voteRank, remarks });
     }
   }
 </script>

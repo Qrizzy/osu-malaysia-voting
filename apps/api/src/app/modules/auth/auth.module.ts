@@ -39,23 +39,23 @@ export class AuthModule implements NestModule {
           tokenURL: 'https://osu.ppy.sh/oauth/token',
           clientID: process.env.OSU_CLIENT_ID,
           clientSecret: process.env.OSU_CLIENT_SECRET,
-          callbackURL: process.env.OSU_CALLBACK_URL
+          callbackURL: process.env.OSU_CALLBACK_URL || 'https://osumy.chiyuu.me/api/auth/callback'
         },
         async (accessToken, refreshToken, profileEmpty, cb) => {
           const apiUser: any = await this.getProfile(accessToken).toPromise();
 
-          // Fetch Malaysian leaderboard if choices are incomplete (< 150) or user is admin
+          // Fetch Malaysian leaderboard if choices are incomplete (< 150), missing global rank, or user is admin
           const choices = await this.choiceService.findAll();
-          const shouldFetchChoices = choices.length < 150 || apiUser.username === process.env.ADMIN_USERNAME || apiUser.username === 'hallowatcher';
+          const shouldFetchChoices = choices.length < 150 || choices.some(c => !c.rank) || apiUser.username === process.env.ADMIN_USERNAME || apiUser.username === 'hallowatcher';
 
           if (shouldFetchChoices) {
             try {
               const malaysiaLeaderboardPageOne = (await this.getMalaysiaLeaderboard(accessToken, 1).toPromise()).ranking;
               const malaysiaLeaderboardPageTwo = (await this.getMalaysiaLeaderboard(accessToken, 2).toPromise()).ranking;
               const malaysiaLeaderboardPageThree = (await this.getMalaysiaLeaderboard(accessToken, 3).toPromise()).ranking;
-              this.saveChoices(malaysiaLeaderboardPageOne, 1);
-              this.saveChoices(malaysiaLeaderboardPageTwo, 2);
-              this.saveChoices(malaysiaLeaderboardPageThree, 3);
+              await this.saveChoices(malaysiaLeaderboardPageOne, 1);
+              await this.saveChoices(malaysiaLeaderboardPageTwo, 2);
+              await this.saveChoices(malaysiaLeaderboardPageThree, 3);
             } catch (err) {
               // Silently handle if rate limited or API error
             }
@@ -116,21 +116,24 @@ export class AuthModule implements NestModule {
     return this.getMalaysiaLeaderboard(token, page);
   }
 
-  saveChoices(choices: any[], page: number) {
+  async saveChoices(choices: any[], page: number) {
     const perPage = 50;
 
-    choices.map(async (e, index) => {
+    await Promise.all(choices.map(async (e, index) => {
       try {
-        const choice = new ChoiceEntity();
-        choice.id = e.user.id;
+        let choice = await this.choiceService.findByUserId(e.user.id);
+        if (!choice) {
+          choice = new ChoiceEntity();
+          choice.id = e.user.id;
+        }
         choice.username = e.user.username;
         choice.country = e.user.country_code;
-        choice.rank = e.pp_rank;
+        choice.rank = e.global_rank ?? e.pp_rank;
         choice.countryRank = (index + 1) + (perPage * (page - 1));
         await this.choiceService.save(choice);
       } catch {
         // Do nothing
       }
-    });
+    }));
   }
 }

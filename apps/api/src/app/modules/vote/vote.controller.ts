@@ -1,4 +1,4 @@
-import { Controller, BadRequestException, UseGuards, Post, Body, Req, Get } from '@nestjs/common';
+import { Controller, BadRequestException, UseGuards, Post, Body, Req, Get, Param, Query } from '@nestjs/common';
 import { LoggedInGuard } from '../auth/guards/logged-in.guard';
 import { ChoiceService } from '../choice/choice.service';
 import { UserService } from '../user/user.service';
@@ -32,6 +32,17 @@ export class VoteController {
   async getMyVotes(@Req() req: AuthenticatedRequest) {
     try {
       return await this.voteService.findCollectionForUser(req.user.id);
+    } catch {
+      throw new BadRequestException();
+    }
+  }
+
+  @Get('/remarks/:choiceId')
+  async getRemarksForChoice(@Param('choiceId') choiceId: string, @Query('year') year?: string) {
+    try {
+      const parsedId = parseInt(choiceId, 10);
+      const parsedYear = year ? parseInt(year, 10) : undefined;
+      return await this.voteService.findRemarksForChoice(parsedId, parsedYear);
     } catch {
       throw new BadRequestException();
     }
@@ -76,6 +87,7 @@ export class VoteController {
         const voteEntity = new VoteEntity();
         voteEntity.choiceId = choice.id;
         voteEntity.ranking = vote.ranking;
+        voteEntity.remarks = vote.remarks ? vote.remarks.trim() : null;
         collection.push(voteEntity);
       }
 

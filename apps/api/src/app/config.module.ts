@@ -31,7 +31,7 @@ import * as Joi from '@hapi/joi';
         // osu!
         OSU_CLIENT_ID: Joi.number().required(),
         OSU_CLIENT_SECRET: Joi.string().required(),
-        OSU_CALLBACK_URL: Joi.string().required(),
+        OSU_CALLBACK_URL: Joi.string().default('https://osumy.chiyuu.me/api/auth/callback'),
         OSU_API_KEY: Joi.string(),
 
         // Voting Configuration

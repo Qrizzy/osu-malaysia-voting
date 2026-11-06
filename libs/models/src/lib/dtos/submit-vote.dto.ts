@@ -4,6 +4,7 @@ export class SubmitVoteDto {
   @IsNotEmpty()
   votes: {
     userId: number,
-    ranking: number
+    ranking: number,
+    remarks?: string
   }[];
 }
