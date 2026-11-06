@@ -636,18 +636,18 @@
         rank: 2,
         osuId: 3995630,
         owc: true,
-        username: 'rampax',
+        username: 'Rampax',
         points: 538
       }, {
         rank: 3,
         osuId: 6716499,
         owc: true,
-        username: 'shaneliang',
+        username: 'ShaneLiang',
         points: 378
       }, {
         rank: 4,
         osuId: 4474918,
-        username: 'inugami korone',
+        username: 'Inugami Korone',
         points: 341
       }, {
         rank: 5,
@@ -657,7 +657,7 @@
       }, {
         rank: 6,
         osuId: 10584780,
-        username: 'hachune miku',
+        username: 'Hachune Miku',
         points: 229
       }, {
         rank: 7,
@@ -668,23 +668,23 @@
       }, {
         rank: 8,
         osuId: 7525949,
-        username: 'shimon',
+        username: 'Shimon',
         points: 135
       }, {
         rank: 9,
         osuId: 2681361,
         owc: true,
-        username: 'clawviper',
+        username: 'ClawViper',
         points: 129
       }, {
         rank: 10,
         osuId: 7673764,
-        username: 'altist',
+        username: 'ALtist',
         points: 76
       }, {
         rank: 11,
         osuId: 11716599,
-        username: 'addam',
+        username: 'Addam',
         points: 72,
         hm: true
       }, {
