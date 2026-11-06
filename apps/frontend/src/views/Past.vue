@@ -38,7 +38,7 @@
             <v-card-subtitle class="d-flex flex-wrap align-center">
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/605973" target="_blank" class="white--text font-weight-bold">jerry</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/605973" target="_blank" class="white--text font-weight-bold ml-1">jerry</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/263125?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -54,7 +54,7 @@
             <v-card-subtitle class="d-flex flex-wrap align-center">
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/3633477" target="_blank" class="white--text font-weight-bold">TequilaWolf</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/3633477" target="_blank" class="white--text font-weight-bold ml-1">TequilaWolf</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/388014?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -62,7 +62,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=0r_D1VU84z0" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(3995630)">Rampax</span>
+                Video by Rampax
               </v-btn>
             </v-card-subtitle>
 
@@ -82,7 +82,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold">ffstar</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold ml-1">ffstar</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/527098?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -90,7 +90,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=h8v-7SgF7ik" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(2676512)">Ex6TenZ</span>
+                Video by Rampax
               </v-btn>
             </v-card-subtitle>
 
@@ -110,7 +110,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold">ffstar</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold ml-1">ffstar</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/668510?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -118,7 +118,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=4dcuNpnVazU" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(2676512)">NazzzF</span>
+                Video by NazzzF
               </v-btn>
             </v-card-subtitle>
 
@@ -138,7 +138,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/4777134" target="_blank" class="white--text font-weight-bold">Jeffrey</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/4777134" target="_blank" class="white--text font-weight-bold ml-1">Jeffrey</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/829895?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -166,7 +166,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/6088976" target="_blank" class="white--text font-weight-bold">Tzero</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/6088976" target="_blank" class="white--text font-weight-bold ml-1">Tzero</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/993736?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -174,7 +174,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=ymqPuTZ-YmA" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(7062729)">Koyaiba</span>
+                Video by Koyaiba
               </v-btn>
             </v-card-subtitle>
 
@@ -194,7 +194,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/13600612" target="_blank" class="white--text font-weight-bold">Its Not Marvin</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/13600612" target="_blank" class="white--text font-weight-bold ml-1">Its Not Marvin</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1186758?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -202,7 +202,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=EqkJv1CdBxE" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(7062729)">Koyaiba</span>&nbsp;assisted by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(10178187)">FaithInOsu</span>
+                Video by Koyaiba assisted by FaithInOsu
               </v-btn>
             </v-card-subtitle>
 
@@ -222,7 +222,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/8691555" target="_blank" class="white--text font-weight-bold">Sonic-</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/8691555" target="_blank" class="white--text font-weight-bold ml-1">Sonic-</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1473515?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -230,7 +230,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=jx7TEE_iu_k" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(6231292)">LouisZpro</span>
+                Video by LouisZpro
               </v-btn>
             </v-card-subtitle>
 
@@ -250,7 +250,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/6231292" target="_blank" class="white--text font-weight-bold">LouisZpro</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/6231292" target="_blank" class="white--text font-weight-bold ml-1">LouisZpro</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1686135?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -258,7 +258,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=edmskQqokJ4&t=1396s" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(6231292)">LouisZpro</span>
+                Video by LouisZpro
               </v-btn>
             </v-card-subtitle>
 
@@ -278,7 +278,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold">Chiyuu</a>&nbsp;&amp;&nbsp;<a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold ml-1">Chiyuu</a><span class="mx-1">&amp;</span><a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2016439?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -286,7 +286,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=Hg7mYpgE4cM" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(8226107)">Chiyuu</span>
+                Video by Chiyuu
               </v-btn>
             </v-card-subtitle>
 
@@ -306,7 +306,7 @@
               </v-chip>
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                Hosted by&nbsp; <a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold">Chiyuu</a>&nbsp;&amp;&nbsp;<a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold ml-1">Chiyuu</a><span class="mx-1">&amp;</span><a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2156052" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
@@ -314,7 +314,7 @@
               </v-btn>
               <v-btn small rounded outlined color="red lighten-1" class="mr-2 mb-2 text-none" href="https://www.youtube.com/watch?v=r0tE1mw-XLI" target="_blank">
                 <v-icon left small>mdi-youtube</v-icon>
-                Video by&nbsp;<span class="text-decoration-underline font-weight-bold" @click.stop.prevent="openProfile(8226107)">Chiyuu</span>
+                Video by Chiyuu
               </v-btn>
             </v-card-subtitle>
 
@@ -345,11 +345,6 @@
   })
   export default class Past extends Vue {
     tab = '2025';
-
-    openProfile(osuId: number) {
-      window.open(`https://osu.ppy.sh/users/${osuId}`, '_blank');
-    }
-
     leaderboards = {
       '2025': [{
         rank: 1,
