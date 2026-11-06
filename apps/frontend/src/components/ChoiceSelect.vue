@@ -18,7 +18,7 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title v-html="data.item.username"></v-list-item-title>
-            <v-list-item-subtitle>#{{ data.item.rank || '?' }} Worldwide, #{{ data.item.countryRank }} MY</v-list-item-subtitle>
+            <v-list-item-subtitle>#{{ data.item.rank || '?' }} Global, #{{ data.item.countryRank }} MY</v-list-item-subtitle>
           </v-list-item-content>
         </template>
       </template>

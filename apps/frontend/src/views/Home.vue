@@ -17,7 +17,7 @@
 
           <div class="d-flex mt-3 align-center justify-center">
             <template v-if="isVotingOpen || isDev">
-              <v-btn large to="/vote" color="pink" v-if="loggedIn">
+              <v-btn large to="/vote" color="#ff66aa" v-if="loggedIn">
                 {{ isVotingOpen ? 'Start voting' : 'Start voting (Dev)' }}
               </v-btn>
 
