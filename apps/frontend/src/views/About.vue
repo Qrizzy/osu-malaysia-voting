@@ -27,26 +27,26 @@
 
             <v-timeline-item color="green">
               <v-row>
-                <v-col sm="2"><b>01.11.26</b></v-col>
+                <v-col sm="2"><b>30.11.26</b></v-col>
                 <v-col>Voting opens</v-col>
               </v-row>
             </v-timeline-item>
             <v-timeline-item color="yellow">
               <v-row>
-                <v-col sm="2"><b>01.12.26</b></v-col>
+                <v-col sm="2"><b>30.12.26</b></v-col>
                 <v-col>Voting ends</v-col>
               </v-row>
             </v-timeline-item>
             <v-timeline-item color="grey">
               <v-row>
-                <v-col sm="2"><b>15.12.26</b></v-col>
-                <v-col>Video production starts</v-col>
+                <v-col sm="2"><b>31.12.26</b></v-col>
+                <v-col>Video production starts if we have an editor</v-col>
               </v-row>
             </v-timeline-item>
             <v-timeline-item color="grey">
               <v-row>
-                <v-col sm="2"><b>31.12.26</b></v-col>
-                <v-col>Video publishing (estimated)</v-col>
+                <v-col sm="2"><b>15.1.2027</b></v-col>
+                <v-col>Results out and hopefully video too</v-col>
               </v-row>
             </v-timeline-item>
           </v-timeline>
