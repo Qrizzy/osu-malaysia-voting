@@ -8,7 +8,7 @@
           show-arrows
           v-model="tab"
         >
-          <v-tab href="#2013">2013</v-tab>
+          <!-- <v-tab href="#2013">2013</v-tab> -->
           <v-tab href="#2014">2014</v-tab>
           <v-tab href="#2015">2015</v-tab>
           <v-tab href="#2016">2016</v-tab>
@@ -16,66 +16,98 @@
           <v-tab href="#2018">2018</v-tab>
           <v-tab href="#2019">2019</v-tab>
           <v-tab href="#2020">2020</v-tab>
+          <v-tab href="#2021">2021</v-tab>
+          <v-tab href="#2022">2022</v-tab>
+          <v-tab href="#2024">2024</v-tab>
+          <v-tab href="#2025">2025</v-tab>
           <v-tab href="#2026">2026</v-tab>
         </v-tabs>
       </v-card>
 
       <v-card class="mt-5">
         <v-tabs-items v-model="tab">
-          <v-tab-item value="2013">
+          <!-- <v-tab-item value="2013">
             <v-card-title>2013 rankings</v-card-title>
             <v-card-subtitle>Voting by Urio in a closed circle decision. Video: <a href="https://www.youtube.com/watch?v=lLKKTa1YNzs" target="_blank">https://www.youtube.com/watch?v=lLKKTa1YNzs</a></v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2013']"></Leaderboard>
-          </v-tab-item>
+          </v-tab-item> -->
 
           <v-tab-item value="2014">
             <v-card-title>2014 rankings</v-card-title>
-            <v-card-subtitle>Voting by JanteSmith in a closed circle decision. Video: <a href="https://www.youtube.com/watch?v=ruDiuFIBCf8" target="_blank">https://www.youtube.com/watch?v=ruDiuFIBCf8</a></v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2014']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2015">
             <v-card-title>2015 rankings</v-card-title>
-            <v-card-subtitle>Voting by JanteSmith in a closed circle decision. Video: <a href="https://www.youtube.com/watch?v=Dy1d0Oog0qo" target="_blank">https://www.youtube.com/watch?v=Dy1d0Oog0qo</a></v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2015']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2016">
             <v-card-title>2016 rankings</v-card-title>
-            <v-card-subtitle>Voting by Katziezi and PaimonRen in a closed circle decision. Video: <a href="https://www.youtube.com/watch?v=7khAUZEAjUU" target="_blank">https://www.youtube.com/watch?v=7khAUZEAjUU</a></v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2016']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2017">
             <v-card-title>2017 rankings</v-card-title>
-            <v-card-subtitle>Voting by _Easy_ in a German community voting format. Video: <a href="https://www.youtube.com/watch?v=D7amtsFU-uE" target="_blank">https://www.youtube.com/watch?v=D7amtsFU-uE</a></v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2017']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2018">
             <v-card-title>2018 rankings</v-card-title>
-            <v-card-subtitle>Provided by Dustice in a top 100 DE voting format. Video: <a href="https://www.youtube.com/watch?v=t-MRpecciLA" target="_blank">https://www.youtube.com/watch?v=t-MRpecciLA</a></v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2018']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2019">
             <v-card-title>2019 rankings</v-card-title>
-            <v-card-subtitle>Provided by hallowatcher in a first and last international voting format. Video: <a href="https://www.youtube.com/watch?v=hJxnYfBMikc" target="_blank">https://www.youtube.com/watch?v=hJxnYfBMikc</a></v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
             <Leaderboard :leaderboard="leaderboards['2019']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2020">
             <v-card-title>2020 rankings</v-card-title>
-            <v-card-subtitle>Voting by hallowatcher.</v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
-            <div class="headline grey--text d-flex align-center justify-center my-10 mx-5">The voting period has ended. The results will be released alongside the video!</div>
+            <Leaderboard :leaderboard="leaderboards['2020']"></Leaderboard>
+          </v-tab-item>
+
+          <v-tab-item value="2021">
+            <v-card-title>2021 rankings</v-card-title>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+
+            <Leaderboard :leaderboard="leaderboards['2021']"></Leaderboard>
+          </v-tab-item>
+
+          <v-tab-item value="2022">
+            <v-card-title>2022 rankings</v-card-title>
+            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+
+            <Leaderboard :leaderboard="leaderboards['2022']"></Leaderboard>
+          </v-tab-item>
+
+          <v-tab-item value="2024">
+            <v-card-title>2024 rankings</v-card-title>
+            <v-card-subtitle>osu! Malaysia top 10 voting. Video: <a href="https://www.youtube.com/watch?v=Hg7mYpgE4cM" target="_blank">https://www.youtube.com/watch?v=Hg7mYpgE4cM</a></v-card-subtitle>
+
+            <Leaderboard :leaderboard="leaderboards['2024']"></Leaderboard>
+          </v-tab-item>
+
+          <v-tab-item value="2025">
+            <v-card-title>2025 rankings</v-card-title>
+            <v-card-subtitle>osu! Malaysia top 10 voting. Video: <a href="https://www.youtube.com/watch?v=r0tE1mw-XLI" target="_blank">https://www.youtube.com/watch?v=r0tE1mw-XLI</a></v-card-subtitle>
+
+            <Leaderboard :leaderboard="leaderboards['2025']"></Leaderboard>
           </v-tab-item>
 
           <v-tab-item value="2026">
@@ -101,351 +133,745 @@
     }
   })
   export default class Past extends Vue {
-    tab = '2019';
+    tab = '2025';
     leaderboards = {
-      '2019': [{
+      '2025': [{
         rank: 1,
-        osuId: 4504101,
-        username: 'WhiteCat'
+        osuId: 2932510,
+        username: 'wuhua',
+        points: 424
       }, {
         rank: 2,
-        osuId: 754565,
+        osuId: 3995630,
         owc: true,
-        username: 'Dustice'
+        username: 'Rampax',
+        points: 346
       }, {
         rank: 3,
-        osuId: 3765989,
+        osuId: 10343292,
         owc: true,
-        username: 'okinamo'
+        username: 'mint breeze',
+        points: 298
       }, {
         rank: 4,
-        osuId: 2766034,
-        owc: true,
-        username: 'Umbre'
+        osuId: 18112324,
+        username: 'riwoto',
+        points: 273
       }, {
         rank: 5,
-        osuId: 1874761,
-        owc: true,
-        username: 'hallowatcher'
+        osuId: 7440783,
+        username: 'Aerora',
+        points: 256
       }, {
         rank: 6,
-        osuId: 8147403,
+        osuId: 11918602,
         owc: true,
-        username: 'Knalli'
+        username: 'mabayu',
+        points: 249
       }, {
         rank: 7,
-        osuId: 3256299,
-        username: 'Epiphany'
+        osuId: 13865320,
+        username: 'milosz kitten',
+        points: 243
       }, {
         rank: 8,
-        osuId: 3772251,
+        osuId: 16436446,
         owc: true,
-        username: 'Ephix'
+        username: 'Lunasa',
+        points: 232
       }, {
         rank: 9,
-        osuId: 2282047,
-        username: 'Risiing'
+        osuId: 7525949,
+        username: 'shimon',
+        points: 205
       }, {
         rank: 10,
-        osuId: 9722332,
-        username: 'Ralidea'
+        osuId: 8226107,
+        owc: true,
+        username: 'Chiyuu',
+        points: 159
+      }, {
+        rank: 11,
+        osuId: 12004902,
+        username: 'lagoyo',
+        points: 128,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 30160132,
+        username: 'Comatose',
+        points: 96,
+        hm: true
+      }],
+
+      '2024': [{
+        rank: 1,
+        osuId: 2932510,
+        owc: true,
+        username: 'wuhua',
+        points: 264
+      }, {
+        rank: 2,
+        osuId: 16436446,
+        owc: true,
+        username: 'Lunasa',
+        points: 210
+      }, {
+        rank: 3,
+        osuId: 14067834,
+        owc: true,
+        username: 'n0 head',
+        points: 201
+      }, {
+        rank: 4,
+        osuId: 3995630,
+        owc: true,
+        username: 'Rampax',
+        points: 143
+      }, {
+        rank: 5,
+        osuId: 7440783,
+        username: 'Aerora',
+        points: 143
+      }, {
+        rank: 6,
+        osuId: 10343292,
+        owc: true,
+        username: 'Zeph2003',
+        points: 131
+      }, {
+        rank: 7,
+        osuId: 15271985,
+        owc: true,
+        username: 'AHotDawg',
+        points: 85
+      }, {
+        rank: 8,
+        osuId: 30160132,
+        username: 'Comatose',
+        points: 84
+      }, {
+        rank: 9,
+        osuId: 8226107,
+        owc: true,
+        username: 'Chiyuu',
+        points: 69
+      }, {
+        rank: 10,
+        osuId: 11918602,
+        owc: true,
+        username: 'Breast',
+        points: 68
+      }, {
+        rank: 11,
+        osuId: 5585377,
+        username: 'Chibi Maruko',
+        points: 38,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 7525949,
+        username: 'shimon',
+        points: 30,
+        hm: true
+      }],
+
+      '2022': [{
+        rank: 1,
+        osuId: 7525949,
+        username: 'shimon',
+        points: 300
+      }, {
+        rank: 2,
+        osuId: 3995630,
+        owc: true,
+        username: 'Rampax',
+        points: 282
+      }, {
+        rank: 3,
+        osuId: 2932510,
+        username: 'wuhua',
+        points: 278
+      }, {
+        rank: 4,
+        osuId: 8226107,
+        owc: true,
+        username: 'Chiyuu',
+        points: 149
+      }, {
+        rank: 5,
+        osuId: 15421908,
+        username: 'Ariaversary',
+        points: 127
+      }, {
+        rank: 6,
+        osuId: 18112324,
+        username: 'riwoto',
+        points: 116
+      }, {
+        rank: 7,
+        osuId: 10343292,
+        username: 'Zeph2003',
+        points: 115
+      }, {
+        rank: 8,
+        osuId: 14290988,
+        owc: true,
+        username: 'Banner',
+        points: 110
+      }, {
+        rank: 9,
+        osuId: 6231292,
+        username: 'LouisZpro',
+        points: 87
+      }, {
+        rank: 10,
+        osuId: 7673764,
+        username: 'cloud_chaser02',
+        points: 76
+      }, {
+        rank: 11,
+        osuId: 4845266,
+        username: 'haruchi',
+        points: 59,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 13472074,
+        username: 'seabee',
+        points: 24,
+        hm: true
+      }],
+
+      '2021': [{
+        rank: 1,
+        osuId: 7525949,
+        owc: true,
+        username: 'Shimon',
+        points: 529
+      }, {
+        rank: 2,
+        osuId: 3995630,
+        owc: true,
+        username: 'Rampax',
+        points: 475
+      }, {
+        rank: 3,
+        osuId: 2932510,
+        owc: true,
+        username: 'wuhua',
+        points: 466
+      }, {
+        rank: 4,
+        osuId: 7673764,
+        username: 'cloud_chaser02',
+        points: 318
+      }, {
+        rank: 5,
+        osuId: 13472074,
+        owc: true,
+        username: 'seabee',
+        points: 297
+      }, {
+        rank: 6,
+        osuId: 4845266,
+        owc: true,
+        username: 'haruchi',
+        points: 285
+      }, {
+        rank: 7,
+        osuId: 6716499,
+        owc: true,
+        username: 'ShaneLiang',
+        points: 236
+      }, {
+        rank: 8,
+        osuId: 10343292,
+        username: 'Zeph2003',
+        points: 101
+      }, {
+        rank: 9,
+        osuId: 4474918,
+        owc: true,
+        username: 'Inugami Korone',
+        points: 97
+      }, {
+        rank: 10,
+        osuId: 8226107,
+        owc: true,
+        username: 'Chiyuu',
+        points: 63
+      }, {
+        rank: 11,
+        osuId: 13865320,
+        username: 'Snowy5441',
+        points: 51,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 11716599,
+        username: 'Addam',
+        points: 35,
+        hm: true
+      }],
+
+      '2020': [{
+        rank: 1,
+        osuId: 2932510,
+        owc: true,
+        username: 'wuhua',
+        points: 559
+      }, {
+        rank: 2,
+        osuId: 3995630,
+        owc: true,
+        username: 'rampax',
+        points: 538
+      }, {
+        rank: 3,
+        osuId: 6716499,
+        owc: true,
+        username: 'shaneliang',
+        points: 378
+      }, {
+        rank: 4,
+        osuId: 4474918,
+        username: 'inugami korone',
+        points: 341
+      }, {
+        rank: 5,
+        osuId: 13472074,
+        username: 'seabee',
+        points: 329
+      }, {
+        rank: 6,
+        osuId: 10584780,
+        username: 'hachune miku',
+        points: 229
+      }, {
+        rank: 7,
+        osuId: 4845266,
+        owc: true,
+        username: 'haruchi',
+        points: 187
+      }, {
+        rank: 8,
+        osuId: 7525949,
+        username: 'shimon',
+        points: 135
+      }, {
+        rank: 9,
+        osuId: 2681361,
+        owc: true,
+        username: 'clawviper',
+        points: 129
+      }, {
+        rank: 10,
+        osuId: 7673764,
+        username: 'altist',
+        points: 76
+      }, {
+        rank: 11,
+        osuId: 11716599,
+        username: 'addam',
+        points: 72,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 9375317,
+        owc: true,
+        username: 'not_aweeb',
+        points: 68,
+        hm: true
+      }],
+
+      '2019': [{
+        rank: 1,
+        osuId: 3995630,
+        owc: true,
+        username: 'Rampax',
+        points: 385
+      }, {
+        rank: 2,
+        osuId: 4845266,
+        username: 'haruchi',
+        points: 292
+      }, {
+        rank: 3,
+        osuId: 6088976,
+        owc: true,
+        username: 'Tzero',
+        points: 273
+      }, {
+        rank: 4,
+        osuId: 6716499,
+        username: 'ShaneLiang',
+        points: 222
+      }, {
+        rank: 5,
+        osuId: 2932510,
+        username: 'wuhua',
+        points: 212
+      }, {
+        rank: 6,
+        osuId: 6932501,
+        owc: true,
+        username: 'NOOB1200',
+        points: 198
+      }, {
+        rank: 7,
+        osuId: 7399262,
+        owc: true,
+        username: 'Desumond',
+        points: 101
+      }, {
+        rank: 8,
+        osuId: 7673764,
+        username: 'MilkyCoffee-',
+        points: 73
+      }, {
+        rank: 9,
+        osuId: 7263047,
+        owc: true,
+        username: 'King Hong',
+        points: 67
+      }, {
+        rank: 10,
+        osuId: 1787171,
+        owc: true,
+        username: 'Rumia-',
+        points: 50
+      }, {
+        rank: 11,
+        osuId: 6570008,
+        username: 'zhev',
+        points: 50,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 8226107,
+        owc: true,
+        username: 'Chiyuu',
+        points: 46,
+        hm: true
       }],
 
       '2018': [{
         rank: 1,
-        osuId: 754565,
-        owc: true,
-        username: 'Dustice'
+        osuId: 2932510,
+        username: 'wuhua',
+        points: 400
       }, {
         rank: 2,
-        osuId: 3765989,
-        owc: true,
-        username: 'okinamo'
+        osuId: 6716499,
+        username: 'ShaneLiang',
+        points: 336
       }, {
         rank: 3,
-        osuId: 1874761,
-        owc: true,
-        username: 'hallowatcher'
+        osuId: 6088976,
+        username: 'Tzero',
+        points: 221
       }, {
         rank: 4,
-        osuId: 2282047,
-        owc: true,
-        username: 'Risiing'
+        osuId: 6570008,
+        username: 'ZheVulture',
+        points: 198
       }, {
         rank: 5,
-        osuId: 2766034,
-        owc: true,
-        username: 'Umbre'
+        osuId: 3633477,
+        username: 'TequilaWolf',
+        points: 168
       }, {
         rank: 6,
-        osuId: 1500305,
-        username: 'Neliel'
+        osuId: 6932501,
+        username: 'NOOB1200',
+        points: 122
       }, {
         rank: 7,
-        osuId: 2022445,
-        owc: true,
-        username: 'imagaK'
+        osuId: 4845266,
+        username: 'haruchi',
+        points: 108
       }, {
         rank: 8,
-        osuId: 8147403,
-        owc: true,
-        username: 'Knalli'
+        osuId: 7399262,
+        username: 'Desumond',
+        points: 105
       }, {
         rank: 9,
-        osuId: 1856829,
-        username: 'Firstus'
+        osuId: 7263047,
+        username: 'King Hong',
+        points: 102
       }, {
         rank: 10,
-        osuId: 6410154,
-        owc: true,
-        username: 'BlueSky-'
+        osuId: 1787171,
+        username: 'Rumia-',
+        points: 101
+      }, {
+        rank: 11,
+        osuId: 4777134,
+        username: 'Jeffrey',
+        points: 78,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 2681361,
+        username: 'ClawViper',
+        points: 61,
+        hm: true
       }],
 
       '2017': [{
         rank: 1,
-        osuId: 754565,
+        osuId: 2932510,
         owc: true,
-        username: 'Dustice'
+        username: 'wuhua',
+        points: 346
       }, {
         rank: 2,
-        osuId: 2022445,
+        osuId: 3995630,
         owc: true,
-        username: 'imagaK'
+        username: 'Rampax',
+        points: 295
       }, {
         rank: 3,
-        osuId: 1500305,
+        osuId: 2681361,
         owc: true,
-        username: 'Neliel'
+        username: 'ClawViper',
+        points: 236
       }, {
         rank: 4,
-        osuId: 1856829,
+        osuId: 1163205,
         owc: true,
-        username: 'Firstus'
+        username: 'ffstar',
+        points: 221
       }, {
         rank: 5,
-        osuId: 2438122,
+        osuId: 3633477,
         owc: true,
-        username: 'Beafowl'
+        username: 'TequilaWolf',
+        points: 199
       }, {
         rank: 6,
-        osuId: 2282047,
-        owc: true,
-        username: 'Risiing'
+        osuId: 1787171,
+        username: 'Rumia-',
+        points: 132
       }, {
         rank: 7,
-        osuId: 3256299,
-        username: 'Epiphany'
+        osuId: 6716499,
+        owc: true,
+        username: 'ShaneLiang',
+        points: 117
       }, {
         rank: 8,
-        osuId: 2316517,
-        username: 'Duftende Pizza'
+        osuId: 2676512,
+        owc: true,
+        username: 'Ex6TenZ',
+        points: 114
       }, {
         rank: 9,
-        osuId: 5710809,
-        owc: true,
-        username: 'Sakurauchi Riko'
+        osuId: 7399262,
+        username: 'Desumond',
+        points: 69
       }, {
         rank: 10,
-        osuId: 1731277,
-        owc: true,
-        username: 'Shiratu'
+        osuId: 7263047,
+        username: 'King Hong',
+        points: 65
+      }, {
+        rank: 11,
+        osuId: 7673764,
+        username: '- Vyx -',
+        points: 57,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 4845266,
+        username: 'haruchi',
+        points: 42,
+        hm: true
       }],
 
       '2016': [{
         rank: 1,
-        osuId: 754565,
-        owc: true,
-        username: 'Dustice'
+        osuId: 2681361,
+        username: 'ClawViper',
+        points: 220
       }, {
         rank: 2,
-        osuId: 537084,
-        owc: true,
-        username: 'DoKito'
+        osuId: 2276847,
+        username: 'Amane-',
+        points: 192
       }, {
         rank: 3,
-        osuId: 2438122,
-        owc: true,
-        username: 'Beafowl'
+        osuId: 3995630,
+        username: 'Rampax',
+        points: 187
       }, {
         rank: 4,
-        osuId: 1874761,
-        username: 'hallowatcher'
+        osuId: 5515561,
+        username: 'sameperson123',
+        points: 177
       }, {
         rank: 5,
-        osuId: 1500305,
-        owc: true,
-        username: 'Neliel'
+        osuId: 3633477,
+        username: 'TequilaWolf',
+        points: 96
       }, {
         rank: 6,
-        osuId: 2022445,
-        owc: true,
-        username: 'imagaK'
+        osuId: 1787171,
+        username: 'Rumia-',
+        points: 83
       }, {
         rank: 7,
-        osuId: 1856829,
-        owc: true,
-        username: 'Firstus'
+        osuId: 4025232,
+        username: 'TheSomething',
+        points: 61
       }, {
         rank: 8,
-        osuId: 1164526,
-        owc: true,
-        username: 'BDDav'
+        osuId: 414427,
+        username: 'xsrsbsns',
+        points: 53
       }, {
         rank: 9,
-        osuId: 4151585,
-        username: 'cmnk'
+        osuId: 818633,
+        username: 'sprItzEr',
+        points: 46
       }, {
         rank: 10,
-        osuId: 2070822,
-        owc: true,
-        username: 'W3SON'
+        osuId: 3871121,
+        username: 'yumesaki-hikari',
+        points: 35
+      }, {
+        rank: 11,
+        osuId: 5667763,
+        username: 'TayGames',
+        points: 28,
+        hm: true
+      }, {
+        rank: 12,
+        osuId: 4903850,
+        username: 'TechnoTrance123',
+        points: 23,
+        hm: true
       }],
 
       '2015': [{
         rank: 1,
-        osuId: 754565,
+        osuId: 414427,
         owc: true,
-        username: 'Dustice'
+        username: 'xsrsbsns',
+        points: 335
       }, {
         rank: 2,
-        osuId: 1164526,
+        osuId: 2681361,
         owc: true,
-        username: 'BDDav'
+        username: 'ClawViper',
+        points: 262
       }, {
         rank: 3,
-        osuId: 846038,
-        username: 'Splinter572'
+        osuId: 3995630,
+        owc: true,
+        username: 'Rampax',
+        points: 247
       }, {
         rank: 4,
-        osuId: 537084,
-        username: 'DoKito'
+        osuId: 583765,
+        owc: true,
+        username: 'Gon',
+        points: 223
       }, {
         rank: 5,
-        osuId: 2438122,
-        owc: true,
-        username: 'Beafowl'
+        osuId: 3633477,
+        username: 'TequilaWolf',
+        points: 192
       }, {
         rank: 6,
-        osuId: 495272,
-        owc: true,
-        username: 'cptnXn'
+        osuId: 818633,
+        username: 'sprItzEr',
+        points: 149
       }, {
         rank: 7,
-        osuId: 1500305,
+        osuId: 2276847,
         owc: true,
-        username: 'Neliel'
+        username: 'Amane-',
+        points: 140
       }, {
         rank: 8,
-        osuId: 2022445,
-        username: 'imagaK'
+        osuId: 1787171,
+        owc: true,
+        username: 'Rumia-',
+        points: 83
       }, {
         rank: 9,
-        osuId: 1856829,
-        username: 'Firstus'
+        osuId: 2676512,
+        owc: true,
+        username: 'Ex6TenZ',
+        points: 59
       }, {
         rank: 10,
-        osuId: 2909663,
-        username: 'MarthXT'
+        osuId: 2205376,
+        owc: true,
+        username: 'caleb123456',
+        points: 45
       }],
 
       '2014': [{
         rank: 1,
-        osuId: 754565,
+        osuId: 414427,
         owc: true,
-        username: 'Dustice'
+        username: 'xsrsbsns',
+        points: 249
       }, {
         rank: 2,
-        osuId: 495272,
-        owc: true,
-        username: 'cptnXn'
+        osuId: 2681361,
+        username: 'ClawViper',
+        points: 205
       }, {
         rank: 3,
-        osuId: 1164526,
-        owc: true,
-        username: 'BDDav'
+        osuId: 3995630,
+        username: 'Rampax',
+        points: 204
       }, {
         rank: 4,
-        osuId: 846038,
+        osuId: 583765,
         owc: true,
-        username: 'Splinter572'
+        username: 'Gon',
+        points: 175
       }, {
         rank: 5,
-        osuId: 1118341,
-        username: 'Jonimay'
+        osuId: 3633477,
+        owc: true,
+        username: 'TequilaWolf',
+        points: 157
       }, {
         rank: 6,
-        osuId: 453226,
-        owc: true,
-        username: 'CookEasy'
+        osuId: 818633,
+        username: 'sprItzEr',
+        points: 129
       }, {
         rank: 7,
-        osuId: 1857058,
-        owc: true,
-        username: 'Tom94'
+        osuId: 2276847,
+        username: 'Amane-',
+        points: 110
       }, {
         rank: 8,
-        osuId: 2028641,
+        osuId: 1787171,
         owc: true,
-        username: 'shunsuke'
+        username: 'Rumia-',
+        points: 76
       }, {
         rank: 9,
-        osuId: 932342,
-        username: 'Michi'
+        osuId: 2676512,
+        owc: true,
+        username: 'Ex6TenZ',
+        points: 73
       }, {
         rank: 10,
-        osuId: 1818573,
-        username: 'Anroyz'
+        osuId: 2205376,
+        owc: true,
+        username: 'caleb123456',
+        points: 65
       }],
-
-      '2013': [{
-        rank: 1,
-        osuId: 453226,
-        owc: true,
-        username: 'CookEasy'
-      }, {
-        rank: 2,
-        osuId: 495272,
-        owc: true,
-        username: 'cptnXn'
-      }, {
-        rank: 3,
-        osuId: 932342,
-        owc: true,
-        username: 'Michi'
-      }, {
-        rank: 4,
-        osuId: 1164526,
-        owc: true,
-        username: 'BDDav'
-      }, {
-        rank: 5,
-        osuId: 754565,
-        owc: true,
-        username: 'Dustice'
-      }, {
-        rank: 6,
-        osuId: 494970,
-        owc: true,
-        username: 'ShadowSoul'
-      }, {
-        rank: 7,
-        osuId: 880002,
-        owc: true,
-        username: 'dukambe'
-      }, {
-        rank: 8,
-        osuId: 1201224,
-        owc: true,
-        username: 'Imamoto'
-      }, {
-        rank: 9,
-        osuId: 276991,
-        username: 'Lelouch'
-      }, {
-        rank: 10,
-        osuId: 846038,
-        username: 'Splinter572'
-      }]
-    }
+    };
   }
 </script>
