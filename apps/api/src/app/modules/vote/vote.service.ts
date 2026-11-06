@@ -111,7 +111,7 @@ export class VoteService {
 
     for (const col of collections) {
       const voterName = col.user ? col.user.username : `User #${col.userId}`;
-      for (const vote of col.votes || []) {
+      for (const vote of col.voteList || []) {
         if (!vote.choiceId || !vote.ranking) continue;
         const points = Math.max(0, 11 - vote.ranking);
         let entry = playerStatsMap.get(vote.choiceId);
