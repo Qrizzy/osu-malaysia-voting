@@ -44,16 +44,18 @@ export class AuthModule implements NestModule {
         async (accessToken, refreshToken, profileEmpty, cb) => {
           const apiUser: any = await this.getProfile(accessToken).toPromise();
 
-          // Fetch Malaysian leaderboard if choices are empty or user is admin
+          // Fetch Malaysian leaderboard if choices are incomplete (< 150) or user is admin
           const choices = await this.choiceService.findAll();
-          const shouldFetchChoices = choices.length === 0 || apiUser.username === process.env.ADMIN_USERNAME || apiUser.username === 'hallowatcher';
+          const shouldFetchChoices = choices.length < 150 || apiUser.username === process.env.ADMIN_USERNAME || apiUser.username === 'hallowatcher';
 
           if (shouldFetchChoices) {
             try {
               const malaysiaLeaderboardPageOne = (await this.getMalaysiaLeaderboard(accessToken, 1).toPromise()).ranking;
               const malaysiaLeaderboardPageTwo = (await this.getMalaysiaLeaderboard(accessToken, 2).toPromise()).ranking;
+              const malaysiaLeaderboardPageThree = (await this.getMalaysiaLeaderboard(accessToken, 3).toPromise()).ranking;
               this.saveChoices(malaysiaLeaderboardPageOne, 1);
               this.saveChoices(malaysiaLeaderboardPageTwo, 2);
+              this.saveChoices(malaysiaLeaderboardPageThree, 3);
             } catch (err) {
               // Silently handle if rate limited or API error
             }

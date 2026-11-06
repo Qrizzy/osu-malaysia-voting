@@ -7,14 +7,63 @@
 
         <v-card-text>
 
-          <v-card>
-            <v-card-text>
-              <h3>Voting format</h3>
-              <p>This year's voting will only account for the Malaysian voters in the top 1000 of Malaysia. International votes will still be possible to have a comparison in the end, but will not count towards the final rankings.</p>
-              <p>The point distribution will be as follows: 7, 6, 5, 5, 4, 4, 3, 3, 2, 1</p>
-              <p>The point multiplier will apply as follows: 1 - 10 MY x5, 11 - 25 MY x4, 26 - 50 MY x3, 50 - 100 MY x2, > 101 MY x1</p>
-            </v-card-text>
-          </v-card>
+          <v-expansion-panels focusable class="mb-4">
+            <v-expansion-panel>
+              <v-expansion-panel-header class="font-weight-bold">
+                <span><v-icon left color="red">mdi-calculator-variant</v-icon> Scoring Formula &amp; Point Calculation</span>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content class="pt-3">
+                <ul>
+                  <li class="mb-2">
+                    Players are awarded points from <b>1st – 10th</b> placement linearly:<br>
+                    <code>10p, 9p, 8p, 7p, 6p, 5p, 4p, 3p, 2p, 1p</code>
+                  </li>
+                  <li class="mb-2">
+                    <b>Outlier Trimming:</b> One instance of the highest and one instance of the lowest voted placement are removed from every player.<br>
+                    <span class="grey--text text--lighten-1 caption">
+                      Example: If a player receives point votes of <code>1-5-2-5-3-1-9-10-10-7-6</code>, one each of the <code>1p</code> and <code>10p</code> votes are removed, leaving <code>5-2-5-3-1-9-10-7-6</code>. This enhances accuracy and discourages "boosting" votes.
+                    </span>
+                  </li>
+                  <li>
+                    The remaining points are totalled up, and the player with the highest total earns the top spot.
+                  </li>
+                </ul>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+            <v-expansion-panel>
+              <v-expansion-panel-header class="font-weight-bold">
+                <span><v-icon left color="amber">mdi-gavel</v-icon> Voting Rules &amp; Eligibility Criteria</span>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content class="pt-3">
+                <h4 class="mb-1">Candidate Eligibility</h4>
+                <ul class="mb-3">
+                  <li>Must possess the <b>Malaysian flag</b> on their osu! profile.</li>
+                  <li>Must be within the <b>top 150 countrywide</b> by the end of the voting period (meeting the minimum pp threshold of the #150 Malaysian player).</li>
+                  <li>Must not be inactive throughout the entirety of the voting year.</li>
+                </ul>
+
+                <h4 class="mb-1">Voter &amp; Ballot Requirements</h4>
+                <ul class="mb-3">
+                  <li><b>Anyone from any country can vote!</b></li>
+                  <li>Your osu! account must be created prior to the voting cutoff date (before November 1st of the voting year).</li>
+                  <li>Your ballot must contain <b>EXACTLY 10 players</b>—no more, no less. If you wish to mention Honorable Mentions, please share them in the forum thread.</li>
+                  <li>Your list <b>cannot contain yourself</b>.</li>
+                </ul>
+
+                <h4 class="mb-1">Guidelines &amp; Fair Play</h4>
+                <ul class="mb-3">
+                  <li>Please vote strictly based on a player's <b>performance during the current voting year</b>. Past years' achievements stay in their respective years.</li>
+                  <li><b>Troll voting</b> (disregarding player skill or voting for completely inactive players) will be voided. If your list contains controversial or unpopular placements, it is advised to write a few sentences in the forum post explaining your reasoning.</li>
+                  <li>You can freely change and update your votes on the website throughout the voting phase. The voting section will close automatically at the deadline.</li>
+                </ul>
+
+                <v-alert dense outlined type="info" class="mt-3 mb-0 caption">
+                  We reserve the right to veto any votes that do not abide by the rules stated above. Should there be any rule changes, a notification will be sent to the osu! Malaysia Discord Server. For inquiries, please contact <b>qrizzy</b> on Discord.
+                </v-alert>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
 
           <v-card class="mt-3">
             <v-card-text>
@@ -28,9 +77,7 @@
                     <span>Logged in as <b>{{ currentUser.username }}</b></span>
 
                     <v-chip-group>
-                      <v-chip small v-if="votingCounts" color="success">Voting counts</v-chip>
-                      <v-chip small v-if="!votingCounts" color="amber">Voting will not count</v-chip>
-                      <v-chip small v-if="votingCounts" color="primary">Multiplier <b class="ml-1">x{{multiplier}}</b></v-chip>
+                      <v-chip small color="success">Eligible to vote</v-chip>
                     </v-chip-group>
                   </v-list-item-content>
                 </v-list-item>
