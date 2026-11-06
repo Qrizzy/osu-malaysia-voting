@@ -43,11 +43,11 @@
                   <li>Must not be inactive throughout the entirety of the voting year.</li>
                 </ul>
 
-                <h4 class="mb-1">Voter &amp; Ballot Requirements</h4>
+                <h4 class="mb-1">Voter &amp; List Requirements</h4>
                 <ul class="mb-3">
                   <li><b>Anyone from any country can vote!</b></li>
                   <li>Your osu! account must be created prior to the voting cutoff date (before November 1st of the voting year).</li>
-                  <li>Your ballot must contain <b>EXACTLY 10 players</b>—no more, no less. If you wish to mention Honorable Mentions, please share them in the forum thread.</li>
+                  <li>Your list must contain <b>EXACTLY 10 players</b>—no more, no less. If you wish to mention Honorable Mentions, please share them in the forum thread.</li>
                   <li>Your list <b>cannot contain yourself</b>.</li>
                 </ul>
 
