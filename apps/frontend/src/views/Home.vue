@@ -17,7 +17,7 @@
 
           <div class="d-flex mt-3 align-center justify-center">
             <template v-if="isVotingOpen">
-              <v-btn large to="/vote" color="red" v-if="loggedIn">
+              <v-btn large to="/vote" color="pink" v-if="loggedIn">
                 Start voting
               </v-btn>
 

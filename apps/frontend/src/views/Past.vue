@@ -40,7 +40,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/605973" target="_blank" class="white--text font-weight-bold ml-1">Jerry</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/263125?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/263125?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -56,7 +56,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/3633477" target="_blank" class="white--text font-weight-bold ml-1">TequilaWolf</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/388014?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/388014?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -84,7 +84,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold ml-1">ffstar</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/527098?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/527098?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -112,7 +112,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/1163205" target="_blank" class="white--text font-weight-bold ml-1">ffstar</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/668510?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/668510?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -140,7 +140,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/4777134" target="_blank" class="white--text font-weight-bold ml-1">Jeffrey</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/829895?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/829895?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -168,7 +168,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/6088976" target="_blank" class="white--text font-weight-bold ml-1">Tzero</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/993736?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/993736?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -196,7 +196,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/13600612" target="_blank" class="white--text font-weight-bold ml-1">Its Not Marvin</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1186758?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1186758?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -224,7 +224,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/8691555" target="_blank" class="white--text font-weight-bold ml-1">Sonic-</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1473515?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1473515?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -252,7 +252,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/6231292" target="_blank" class="white--text font-weight-bold ml-1">LouisZpro</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1686135?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/1686135?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -280,7 +280,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold ml-1">Chiyuu</a><span class="mx-1">&amp;</span><a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2016439?n=1" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2016439?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
@@ -308,7 +308,7 @@
                 <v-icon left x-small>mdi-account-star</v-icon>
                 <span>Hosted by <a href="https://osu.ppy.sh/users/8226107" target="_blank" class="white--text font-weight-bold ml-1">Chiyuu</a><span class="mx-1">&amp;</span><a href="https://osu.ppy.sh/users/9364594" target="_blank" class="white--text font-weight-bold">Sagisawa Arisu</a></span>
               </v-chip>
-              <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2156052" target="_blank">
+              <v-btn small rounded outlined color="pink" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/2156052" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
                 Forum Post
               </v-btn>
