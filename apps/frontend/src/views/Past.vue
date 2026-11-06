@@ -38,7 +38,7 @@
             <v-card-subtitle class="d-flex flex-wrap align-center">
               <v-chip small outlined class="mr-2 mb-2" color="blue-grey lighten-2">
                 <v-icon left x-small>mdi-account-star</v-icon>
-                <span>Hosted by <a href="https://osu.ppy.sh/users/605973" target="_blank" class="white--text font-weight-bold ml-1">jerry</a></span>
+                <span>Hosted by <a href="https://osu.ppy.sh/users/605973" target="_blank" class="white--text font-weight-bold ml-1">Jerry</a></span>
               </v-chip>
               <v-btn small rounded outlined color="primary" class="mr-2 mb-2 text-none" href="https://osu.ppy.sh/community/forums/topics/263125?n=1" target="_blank">
                 <v-icon left small>mdi-forum</v-icon>
