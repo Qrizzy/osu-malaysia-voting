@@ -16,18 +16,24 @@
           </div>
 
           <div class="d-flex mt-3 align-center justify-center">
-            <v-btn large to="/vote" color="red" v-if="loggedIn">
-              Start voting
-            </v-btn>
+            <template v-if="isVotingOpen">
+              <v-btn large to="/vote" color="red" v-if="loggedIn">
+                Start voting
+              </v-btn>
 
-            <v-btn
-              large
-              color="pink"
-              v-if="!loggedIn"
-              @click="logIn()"
-              :loading="loggingIn"
-            >
-              Log in to start voting
+              <v-btn
+                large
+                color="pink"
+                v-if="!loggedIn"
+                @click="logIn()"
+                :loading="loggingIn"
+              >
+                Log in to start voting
+              </v-btn>
+            </template>
+
+            <v-btn large disabled v-else>
+              {{ hasVotingEnded ? 'Voting has ended' : 'Voting opens on 30.11.2026' }}
             </v-btn>
 
             <v-btn large to="/past" class="ml-3" text>
@@ -57,6 +63,9 @@ import { namespace } from 'vuex-class';
 const auth = namespace('Auth');
 const vote = namespace('Vote');
 
+const VOTING_OPEN_DATE = new Date('2026-11-30T00:00:00+08:00');
+const VOTING_CLOSE_DATE = new Date('2026-12-30T23:59:59+08:00');
+
 @Component({})
 export default class Home extends Vue {
   @auth.State
@@ -73,6 +82,15 @@ export default class Home extends Vue {
 
   @vote.Action
   getTotalVotes!: () => void;
+
+  get isVotingOpen(): boolean {
+    const now = new Date();
+    return now >= VOTING_OPEN_DATE && now <= VOTING_CLOSE_DATE;
+  }
+
+  get hasVotingEnded(): boolean {
+    return new Date() > VOTING_CLOSE_DATE;
+  }
 
   mounted() {
     this.getTotalVotes();

@@ -52,6 +52,14 @@ export class VoteController {
   @UseGuards(LoggedInGuard)
   async submitVotes(@Req() req: AuthenticatedRequest, @Body() dto: SubmitVoteDto) {
     try {
+      const now = new Date();
+      const votingOpenDate = new Date('2026-11-30T00:00:00+08:00');
+      const votingCloseDate = new Date('2026-12-30T23:59:59+08:00');
+
+      if (now < votingOpenDate || now > votingCloseDate) {
+        throw new BadRequestException('Voting is currently closed. Voting is open from 30.11.2026 to 30.12.2026.');
+      }
+
       const user = req.user;
       if (!user) {
         throw new BadRequestException();

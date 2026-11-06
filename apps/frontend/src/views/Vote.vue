@@ -77,37 +77,48 @@
                     <span>Logged in as <b>{{ currentUser.username }}</b></span>
 
                     <v-chip-group>
-                      <v-chip small color="success">Eligible to vote</v-chip>
+                      <v-chip small color="success" v-if="isVotingOpen">Eligible to vote</v-chip>
+                      <v-chip small color="warning" v-else>{{ hasVotingEnded ? 'Voting closed' : 'Voting opens 30.11.2026' }}</v-chip>
                     </v-chip-group>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
 
-              <div class="d-flex align-center justify-center my-5" v-if="loadingChoices">
-                <v-progress-circular indeterminate color="primary" width="6" size="46"></v-progress-circular>
-              </div>
+              <v-alert border="left" type="info" class="my-4" v-if="!isVotingOpen">
+                <template v-if="hasVotingEnded">
+                  Voting for 2026 ended on <b>30.12.2026</b>. Thank you for participating!
+                </template>
+                <template v-else>
+                  Voting is currently closed and will open on <b>30.11.2026</b> until <b>30.12.2026</b>.
+                </template>
+              </v-alert>
 
-
-              <div v-if="!loadingChoices && choices.length > 0">
-                <v-alert id="error" border="left" type="error" v-if="errorMessage">{{errorMessage}}</v-alert>
-                <v-alert id="success" border="left" type="success" v-if="submitted">Submitted successfully! If you submit again, it will replace your previous submission.</v-alert>
-
-                <ChoiceSelect
-                  v-for="index in 10"
-                  :key="index"
-                  :choices="choices"
-                  :selected-choice="getVote(index)"
-                  :remarks="getRemark(index)"
-                  :field-for-rank="index"
-                  @select-choice="selectChoice($event, index)"
-                  @update-remarks="updateRemark($event, index)"
-                ></ChoiceSelect>
-
-                <div class="d-flex align-center justify-end">
-                  <span class="font-weight-bold grey--text mr-5" v-if="lastSaved">Last saved {{ lastSaved.fromNow() }}</span>
-                  <v-btn @click="submit" color="primary" :loading="submitting">Submit</v-btn>
+              <template v-else>
+                <div class="d-flex align-center justify-center my-5" v-if="loadingChoices">
+                  <v-progress-circular indeterminate color="primary" width="6" size="46"></v-progress-circular>
                 </div>
-              </div>
+
+                <div v-if="!loadingChoices && choices.length > 0">
+                  <v-alert id="error" border="left" type="error" v-if="errorMessage">{{errorMessage}}</v-alert>
+                  <v-alert id="success" border="left" type="success" v-if="submitted">Submitted successfully! If you submit again, it will replace your previous submission.</v-alert>
+
+                  <ChoiceSelect
+                    v-for="index in 10"
+                    :key="index"
+                    :choices="choices"
+                    :selected-choice="getVote(index)"
+                    :remarks="getRemark(index)"
+                    :field-for-rank="index"
+                    @select-choice="selectChoice($event, index)"
+                    @update-remarks="updateRemark($event, index)"
+                  ></ChoiceSelect>
+
+                  <div class="d-flex align-center justify-end">
+                    <span class="font-weight-bold grey--text mr-5" v-if="lastSaved">Last saved {{ lastSaved.fromNow() }}</span>
+                    <v-btn @click="submit" color="primary" :loading="submitting">Submit</v-btn>
+                  </div>
+                </div>
+              </template>
             </v-card-text>
           </v-card>
         </v-card-text>
@@ -127,6 +138,9 @@
   const choice = namespace('Choice');
   const vote = namespace('Vote');
 
+  const VOTING_OPEN_DATE = new Date('2026-11-30T00:00:00+08:00');
+  const VOTING_CLOSE_DATE = new Date('2026-12-30T23:59:59+08:00');
+
   @Component({
     components: {
       ChoiceSelect
@@ -134,6 +148,15 @@
   })
   export default class Vote extends Vue {
     @auth.State currentUser!: any;
+
+    get isVotingOpen(): boolean {
+      const now = new Date();
+      return now >= VOTING_OPEN_DATE && now <= VOTING_CLOSE_DATE;
+    }
+
+    get hasVotingEnded(): boolean {
+      return new Date() > VOTING_CLOSE_DATE;
+    }
 
     @choice.State loadingChoices: boolean;
     @choice.State choices: any[];
