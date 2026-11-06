@@ -1,6 +1,6 @@
 <template>
   <v-row class="past">
-    <v-col md="6" offset-md="3">
+    <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" lg="6" offset-lg="3">
       <v-card v-if="currentUser">
         <v-card-title>2026 Voting</v-card-title>
         <v-card-subtitle>Vote for the top 10 osu! Malaysia Players of 2026</v-card-subtitle>

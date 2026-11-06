@@ -1,10 +1,10 @@
 <template>
   <v-row class="past">
-    <v-col md="6" offset-md="3">
+    <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" lg="6" offset-lg="3">
       <v-card>
         <v-tabs
           dark
-          fixed-tabs
+          center-active
           show-arrows
           v-model="tab"
         >
@@ -325,7 +325,7 @@
             <v-card-title>2026 rankings</v-card-title>
             <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
-            <div class="headline grey--text d-flex align-center justify-center my-10 mx-5">The data for this year has not been projected yet. Make sure to cast your votes before the voting period ends!</div>
+            <div class="text-subtitle-1 text-sm-h5 grey--text d-flex align-center justify-center text-center my-10 mx-5">The data for this year has not been projected yet. Make sure to cast your votes before the voting period ends!</div>
           </v-tab-item>
         </v-tabs-items>
       </v-card>

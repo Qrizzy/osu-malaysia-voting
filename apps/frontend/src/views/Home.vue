@@ -3,27 +3,28 @@
     <section>
       <v-parallax src="../assets/bg.jpg" height="800" alt="BG">
         <v-overlay absolute color="#000000" opacity="0.8">
-          <div class="d-flex flex-column align-center justify-center">
-            <h1 class="white--text mb-2 display-2 text-center text-md-left">
+          <div class="d-flex flex-column align-center justify-center px-4">
+            <h1 class="white--text mb-2 text-h4 text-sm-h3 text-md-h2 font-weight-light text-center">
               osu! Malaysia Top 10 Players 2026
             </h1>
-            <div class="white--text subtitle-1 text-center text-md-left">
+            <div class="white--text subtitle-1 text-center">
               osu! Malaysia yearly top 10 voting for the year 2026
             </div>
-            <div class="grey--text subtitle-2 mb-4 text-center text-md-left">
+            <div class="grey--text subtitle-2 mb-4 text-center">
               Currently at <b>{{ totalVotes }}</b> submissions.
             </div>
           </div>
 
-          <div class="d-flex mt-3 align-center justify-center">
+          <div class="d-flex flex-column flex-sm-row flex-wrap mt-3 align-center justify-center px-4">
             <template v-if="isVotingOpen || isDev">
-              <v-btn large to="/vote" color="#ff66aa" v-if="loggedIn">
+              <v-btn large to="/vote" color="#ff66aa" class="mb-2 mb-sm-0" v-if="loggedIn">
                 {{ isVotingOpen ? 'Start voting' : 'Start voting (Dev)' }}
               </v-btn>
 
               <v-btn
                 large
                 color="pink"
+                class="mb-2 mb-sm-0"
                 v-if="!loggedIn"
                 @click="logIn()"
                 :loading="loggingIn"
@@ -32,17 +33,19 @@
               </v-btn>
             </template>
 
-            <v-btn large disabled v-else>
+            <v-btn large disabled class="mb-2 mb-sm-0" v-else>
               {{ hasVotingEnded ? 'Voting has ended' : 'Voting opens on 30.11.2026' }}
             </v-btn>
 
-            <v-btn large to="/past" class="ml-3" text>
-              Past results
-            </v-btn>
+            <div class="d-flex align-center justify-center">
+              <v-btn large to="/past" class="ml-sm-3" text>
+                Past results
+              </v-btn>
 
-            <v-btn large to="/about" class="ml-3" text>
-              About
-            </v-btn>
+              <v-btn large to="/about" class="ml-2 ml-sm-3" text>
+                About
+              </v-btn>
+            </div>
           </div>
         </v-overlay>
       </v-parallax>

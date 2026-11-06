@@ -1,6 +1,6 @@
 <template>
   <v-row class="about">
-    <v-col md="6" offset-md="3">
+    <v-col cols="12" sm="10" offset-sm="1" md="8" offset-md="2" lg="6" offset-lg="3">
       <v-card>
         <v-img height="100px" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
           <v-overlay class="align-end justify-start" absolute color="#000000" opacity="0.8">
@@ -84,26 +84,26 @@
 
             <v-timeline-item color="green">
               <v-row>
-                <v-col sm="2"><b>30.11.26</b></v-col>
-                <v-col>Voting opens</v-col>
+                <v-col cols="12" sm="3" class="pb-0 pb-sm-3"><b>30.11.26</b></v-col>
+                <v-col cols="12" sm="9" class="pt-1 pt-sm-3">Voting opens</v-col>
               </v-row>
             </v-timeline-item>
             <v-timeline-item color="yellow">
               <v-row>
-                <v-col sm="2"><b>30.12.26</b></v-col>
-                <v-col>Voting ends</v-col>
+                <v-col cols="12" sm="3" class="pb-0 pb-sm-3"><b>30.12.26</b></v-col>
+                <v-col cols="12" sm="9" class="pt-1 pt-sm-3">Voting ends</v-col>
               </v-row>
             </v-timeline-item>
             <v-timeline-item color="grey">
               <v-row>
-                <v-col sm="2"><b>31.12.26</b></v-col>
-                <v-col>Video production starts if we have an editor</v-col>
+                <v-col cols="12" sm="3" class="pb-0 pb-sm-3"><b>31.12.26</b></v-col>
+                <v-col cols="12" sm="9" class="pt-1 pt-sm-3">Video production starts if we have an editor</v-col>
               </v-row>
             </v-timeline-item>
             <v-timeline-item color="grey">
               <v-row>
-                <v-col sm="2"><b>15.1.2027</b></v-col>
-                <v-col>Results out and hopefully video too</v-col>
+                <v-col cols="12" sm="3" class="pb-0 pb-sm-3"><b>15.1.2027</b></v-col>
+                <v-col cols="12" sm="9" class="pt-1 pt-sm-3">Results out and hopefully video too</v-col>
               </v-row>
             </v-timeline-item>
           </v-timeline>

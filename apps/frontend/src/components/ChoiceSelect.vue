@@ -33,7 +33,7 @@
       dense
       placeholder="Optional remarks for this player (shown on their results page)..."
       prepend-inner-icon="mdi-comment-text-outline"
-      class="mt-1 ml-4"
+      class="mt-1 ml-0 ml-sm-4"
       hide-details="auto"
       counter="500"
       maxlength="500"

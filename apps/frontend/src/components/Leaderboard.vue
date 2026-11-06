@@ -13,18 +13,20 @@
       <tr v-for="user in leaderboard" :key="user.username">
         <td>{{ user.rank }}</td>
         <td>
-          <v-avatar size="36">
-            <img :src="'https://a.ppy.sh/' + user.osuId" alt="avatar">
-          </v-avatar>
+          <div class="d-flex align-center py-1">
+            <v-avatar size="32" class="flex-shrink-0">
+              <img :src="'https://a.ppy.sh/' + user.osuId" alt="avatar">
+            </v-avatar>
 
-          <v-badge bordered color="red" content="owc" inline :value="user.owc ? user.owc : false">
-            <v-badge bordered color="grey" content="HM" inline :value="user.hm ? user.hm : (user.rank === 11 || user.rank === 12)">
-              <span class="ml-3">{{ user.username }}</span>
+            <v-badge bordered color="red" content="owc" inline :value="user.owc ? user.owc : false">
+              <v-badge bordered color="grey" content="HM" inline :value="user.hm ? user.hm : (user.rank === 11 || user.rank === 12)">
+                <span class="ml-2 ml-sm-3">{{ user.username }}</span>
+              </v-badge>
             </v-badge>
-          </v-badge>
+          </div>
         </td>
         <td v-if="hasPoints">{{ user.points !== undefined ? user.points : '-' }}</td>
-        <td style="text-align: right;">
+        <td style="text-align: right; white-space: nowrap;">
           <v-btn x-small text @click="openProfile(user.osuId)">profile</v-btn>
         </td>
       </tr>
@@ -36,6 +38,13 @@
 <style lang="scss" scoped>
   tr:hover {
     background: transparent !important;
+  }
+
+  @media (max-width: 600px) {
+    ::v-deep th,
+    ::v-deep td {
+      padding: 0 8px !important;
+    }
   }
 </style>
 
