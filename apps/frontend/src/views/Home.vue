@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <section>
-      <v-parallax src="../assets/bg.jpg" height="800" alt="BG">
+      <v-parallax src="../assets/bg.jpg" :height="parallaxHeight" alt="BG">
         <v-overlay absolute color="#000000" opacity="0.8">
           <div class="d-flex flex-column align-center justify-center px-4">
             <h1 class="white--text mb-2 text-h4 text-sm-h3 text-md-h2 font-weight-light text-center">
@@ -88,6 +88,13 @@ export default class Home extends Vue {
 
   @vote.Action
   getTotalVotes!: () => void;
+
+  get parallaxHeight(): number {
+    if (typeof window !== 'undefined') {
+      return Math.max(800, window.innerHeight - 48);
+    }
+    return 800;
+  }
 
   get isDev(): boolean {
     return Boolean(

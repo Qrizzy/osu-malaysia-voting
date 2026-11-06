@@ -1,5 +1,5 @@
 <template>
-  <v-footer padless class="mt-8">
+  <v-footer app padless absolute>
     <v-card flat tile width="100%" class="lighten-1 text-center">
       <v-card-text>
         <v-btn class="mx-2 mx-sm-4 white--text" icon href="https://twitter.com/osumalaysia" target="_blank"><v-icon size="24px">mdi-twitter</v-icon></v-btn>
