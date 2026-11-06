@@ -56,6 +56,7 @@
 <style lang="scss">
 .home {
   margin: -12px;
+  overflow: hidden;
 }
 </style>
 
@@ -90,10 +91,8 @@ export default class Home extends Vue {
   getTotalVotes!: () => void;
 
   get parallaxHeight(): number {
-    if (typeof window !== 'undefined') {
-      return Math.max(800, window.innerHeight - 48);
-    }
-    return 800;
+    const vh = this.$vuetify?.breakpoint?.height || (typeof window !== 'undefined' ? window.innerHeight : 800);
+    return Math.max(450, vh - 160);
   }
 
   get isDev(): boolean {

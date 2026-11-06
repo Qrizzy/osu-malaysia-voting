@@ -1,5 +1,5 @@
 <template>
-  <v-footer app padless absolute>
+  <v-footer :fixed="isHome" :absolute="!isHome" app padless>
     <v-card flat tile width="100%" class="lighten-1 text-center">
       <v-card-text>
         <v-btn class="mx-2 mx-sm-4 white--text" icon href="https://twitter.com/osumalaysia" target="_blank"><v-icon size="24px">mdi-twitter</v-icon></v-btn>
@@ -25,3 +25,14 @@
     </v-card>
   </v-footer>
 </template>
+
+<script lang="ts">
+  import { Component, Vue } from 'vue-property-decorator';
+
+  @Component
+  export default class Footer extends Vue {
+    get isHome(): boolean {
+      return this.$route.name === 'Home' || this.$route.path === '/';
+    }
+  }
+</script>
