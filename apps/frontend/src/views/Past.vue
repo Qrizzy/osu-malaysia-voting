@@ -326,6 +326,19 @@
             <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
 
             <div class="text-subtitle-1 text-sm-h5 grey--text d-flex align-center justify-center text-center my-10 mx-5">The data for this year has not been projected yet. Make sure to cast your votes before the voting period ends!</div>
+
+            <div class="d-flex justify-center mb-8">
+              <v-btn
+                rounded
+                outlined
+                color="#ff66aa"
+                to="/2026/7"
+                class="text-none font-weight-bold"
+              >
+                <v-icon left>mdi-play-circle</v-icon>
+                Preview Top 10 Result (7th Place – AHotDawg)
+              </v-btn>
+            </div>
           </v-tab-item>
         </v-tabs-items>
       </v-card>

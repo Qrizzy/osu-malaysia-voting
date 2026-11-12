@@ -39,3 +39,7 @@ testem.log
 Thumbs.db
 
 .env
+
+# Large media files
+*.mp4
+apps/frontend/public/players submissions/**/*.mp4

@@ -55,6 +55,12 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "past" */ '../views/Past.vue')
   },
   {
+    path: '/:year/:rank',
+    name: 'PlayerResult',
+    component: () =>
+      import(/* webpackChunkName: "result" */ '../views/PlayerResult.vue')
+  },
+  {
     path: '*',
     name: 'NotFound',
     component: NotFound
