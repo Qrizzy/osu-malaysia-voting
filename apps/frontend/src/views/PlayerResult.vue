@@ -55,6 +55,17 @@
             </div>
           </div>
         </div>
+
+        <!-- Subtle audio unlock hint during intro when not yet interacted -->
+        <transition name="fade">
+          <div
+            v-if="!userInteracted"
+            class="intro-audio-hint caption grey--text text--lighten-1 d-flex align-center"
+          >
+            <v-icon x-small color="pink lighten-2" class="mr-1">mdi-volume-high</v-icon>
+            Click anywhere or Skip Intro to enable audio
+          </div>
+        </transition>
       </div>
     </transition>
 
@@ -187,10 +198,16 @@
           </div>
 
           <!-- Play overlay icon if paused -->
-          <div v-if="!videoPlaying" class="video-center-play" @click="toggleVideoPlay">
+          <div v-if="!videoPlaying" class="video-center-play flex-column" @click="toggleVideoPlay">
             <v-btn fab large color="pink" dark class="elevation-8">
               <v-icon large>mdi-play</v-icon>
             </v-btn>
+            <div
+              v-if="videoAutoplayBlocked"
+              class="mt-3 px-3 py-1 rounded-pill caption font-weight-bold white--text video-autoplay-hint"
+            >
+              Click anywhere to play replay &amp; commentary
+            </div>
           </div>
 
           <!-- Video Custom Controls Bar -->
@@ -508,11 +525,35 @@
       <!-- Hidden Commentary Audio Element -->
       <audio
         ref="commentaryAudio"
+        preload="auto"
         :src="commentaryAudioSrc"
+        @play="onCommentaryPlay"
+        @pause="onCommentaryPause"
         @timeupdate="onCommentaryTimeUpdate"
         @ended="onCommentaryEnded"
       ></audio>
     </v-container>
+
+    <!-- AUTOPLAY BLOCKED FLOATING PROMPT (Chrome Incognito / LibreWolf) -->
+    <transition name="fade">
+      <button
+        v-if="!showIntro && (videoAutoplayBlocked || audioAutoplayBlocked)"
+        type="button"
+        class="autoplay-unlock-banner d-flex align-center px-4 py-2 elevation-8"
+        @click.stop="unlockAllMediaFromGesture"
+      >
+        <v-icon small color="pink accent-2" class="mr-2">
+          {{ videoAutoplayBlocked ? 'mdi-play-circle' : 'mdi-volume-off' }}
+        </v-icon>
+        <span class="caption text-sm-body-2 font-weight-medium white--text">
+          {{
+            videoAutoplayBlocked
+              ? 'Autoplay blocked by browser — Click anywhere to start replay & commentary'
+              : 'Audio muted by browser — Click anywhere to unmute & start commentary'
+          }}
+        </span>
+      </button>
+    </transition>
   </div>
 </template>
 
@@ -544,32 +585,42 @@
     // Intro sequence state
     showIntro = true;
     introStep = 0; // 0: circle, 1: number, 2: slide_left & pfp reveal
+    introTimers: number[] = [];
 
     // Media & Replays state
     activeClipIndex = 0;
     videoPlaying = false;
     videoCurrentTime = 0;
     videoDuration = 0;
-    videoVolume = 0.9;
+    videoVolume = 0.3;
     isVideoMuted = false;
-    previousVideoVolume = 0.9;
+    previousVideoVolume = 0.3;
     isFullscreen = false;
-    pendingStartTime: number | null = null;
+    initialStartApplied = false;
     shouldBePlaying = false;
     isSeeking = false;
 
     // Commentary audio state
     commentaryPlaying = false;
+    commentaryStartedOnce = false;
     commentaryTime = 0;
     commentaryDuration = 51.15;
     commentaryVolume = 1.0;
     isCommentaryMuted = false;
     previousCommentaryVolume = 1.0;
 
+    // Autoplay & user gesture state
+    userInteracted = false;
+    videoAutoplayBlocked = false;
+    audioAutoplayBlocked = false;
+    userManuallyMutedVideo = false;
+    userManuallyPausedVideo = false;
+    userManuallyPausedCommentary = false;
+    userGestureListener: (() => void) | null = null;
+
     // Remarks interaction state
     showRemarks = false;
     isHoveringRemarks = false;
-    userGestureListener: (() => void) | null = null;
 
     // Player Data
     player = {
@@ -701,86 +752,134 @@
 
     @Watch('$route')
     onRouteChange() {
+      this.clearIntroTimers();
       this.pauseAllMedia();
       this.activeClipIndex = 0;
       this.showIntro = true;
       this.introStep = 0;
+      const video = this.$refs.mainVideo as HTMLVideoElement;
+      this.videoDuration = video && !isNaN(video.duration) ? video.duration : 0;
+      this.videoCurrentTime = 0;
+      this.commentaryTime = 0;
+      this.commentaryStartedOnce = false;
+      this.initialStartApplied = false;
+      this.videoAutoplayBlocked = false;
+      this.audioAutoplayBlocked = false;
+      this.userManuallyMutedVideo = false;
+      this.userManuallyPausedVideo = false;
+      this.userManuallyPausedCommentary = false;
       this.runIntroSequence();
     }
 
     mounted() {
+      const userActivation = (navigator as unknown as { userActivation?: { hasBeenActive: boolean } }).userActivation;
+      if (userActivation && userActivation.hasBeenActive) {
+        this.userInteracted = true;
+      }
       this.runIntroSequence();
     }
 
     beforeDestroy() {
+      this.clearIntroTimers();
       this.pauseAllMedia();
       this.removeUserGestureListener();
     }
 
+    clearIntroTimers() {
+      this.introTimers.forEach((id) => window.clearTimeout(id));
+      this.introTimers = [];
+    }
+
     runIntroSequence() {
+      this.clearIntroTimers();
       this.showIntro = true;
       this.introStep = 0; // 0s: circle ring fades in
+      this.initialStartApplied = false;
+      this.setupUserGestureUnlock();
 
       // 0.9s: placement number fades in inside centered circle
-      setTimeout(() => {
-        if (!this.showIntro) return;
-        this.introStep = 1;
-      }, 900);
+      this.introTimers.push(
+        window.setTimeout(() => {
+          if (!this.showIntro) return;
+          this.introStep = 1;
+        }, 900)
+      );
 
       // 1.9s: circle shifts left with placement number still inside, video starts immediately
-      setTimeout(() => {
-        if (!this.showIntro) return;
-        this.introStep = 2; // triggers container shift to left
-        this.startVideoAtClipStart();
-      }, 1900);
+      this.introTimers.push(
+        window.setTimeout(() => {
+          if (!this.showIntro) return;
+          this.introStep = 2; // triggers container shift to left
+          this.startVideoAtClipStart(false);
+        }, 1900)
+      );
 
       // 2.8s: AFTER shift finishes, placement number switches to player pfp and name/stats slide in
-      setTimeout(() => {
-        if (!this.showIntro) return;
-        this.introStep = 3;
-      }, 2800);
+      this.introTimers.push(
+        window.setTimeout(() => {
+          if (!this.showIntro) return;
+          this.introStep = 3;
+        }, 2800)
+      );
 
       // 4.9s: overlay fades out smoothly, revealing full interactive view
-      setTimeout(() => {
-        if (!this.showIntro) return;
-        this.showIntro = false;
-        this.onMainSiteRevealed();
-      }, 4900);
+      this.introTimers.push(
+        window.setTimeout(() => {
+          if (!this.showIntro) return;
+          this.showIntro = false;
+          this.onMainSiteRevealed();
+        }, 4900)
+      );
     }
 
     skipIntro() {
+      this.clearIntroTimers();
+      this.userInteracted = true;
       this.showIntro = false;
-      this.startVideoAtClipStart();
-      this.onMainSiteRevealed();
+      this.userManuallyPausedVideo = false;
+      this.userManuallyPausedCommentary = false;
+      this.videoVolume = 0.3;
+      this.previousVideoVolume = 0.3;
+      if (!this.userManuallyMutedVideo) {
+        this.isVideoMuted = false;
+      }
+      this.startVideoAtClipStart(true);
+      this.startCommentaryPlayback(true);
     }
 
-    startVideoAtClipStart() {
-      this.shouldBePlaying = true;
-      this.pendingStartTime = this.activeReplay.startTime;
-      this.$nextTick(() => {
-        const video = this.$refs.mainVideo as HTMLVideoElement;
-        if (!video) return;
-
-        if (!isNaN(video.duration) && video.duration > 0) {
-          if (this.activeReplay.startTime > 0) {
-            this.isSeeking = true;
-            video.currentTime = this.activeReplay.startTime;
-            this.pendingStartTime = null;
-          } else {
-            this.attemptPlayVideo();
-          }
-        } else {
-          this.attemptPlayVideo();
+    applyClipStartTime(video: HTMLVideoElement) {
+      if (this.initialStartApplied) return;
+      if (!isNaN(video.duration) && video.duration > 0) {
+        this.initialStartApplied = true;
+        const target = this.activeReplay.startTime;
+        if (target > 0 && Math.abs(video.currentTime - target) > 1.0) {
+          this.isSeeking = true;
+          video.currentTime = target;
         }
-      });
+      }
     }
 
-    attemptPlayVideo() {
+    startVideoAtClipStart(fromUserGesture = false) {
+      this.shouldBePlaying = true;
+      const video = this.$refs.mainVideo as HTMLVideoElement;
+      if (!video) return;
+      this.applyClipStartTime(video);
+      this.attemptPlayVideo(fromUserGesture);
+    }
+
+    attemptPlayVideo(fromUserGesture = false) {
       const video = this.$refs.mainVideo as HTMLVideoElement;
       if (!video) return;
       this.shouldBePlaying = true;
 
-      if (this.isSeeking) return;
+      // Only defer automatic playback while actively seeking; never drop a user-initiated play!
+      if (this.isSeeking && !fromUserGesture && !this.userInteracted) return;
+
+      this.applyClipStartTime(video);
+
+      if (fromUserGesture && !this.userManuallyMutedVideo) {
+        this.isVideoMuted = false;
+      }
 
       video.volume = this.videoVolume;
       video.muted = this.isVideoMuted;
@@ -790,90 +889,200 @@
         playPromise
           .then(() => {
             this.videoPlaying = true;
+            this.videoAutoplayBlocked = false;
+            this.maybeCleanupGestureListener();
           })
           .catch(() => {
-            // Unmuted autoplay blocked by browser policy: fall back to muted autoplay
-            this.isVideoMuted = true;
+            if (this.isVideoMuted) {
+              // Even muted playback is blocked (e.g. LibreWolf strict policy)
+              this.videoPlaying = false;
+              this.videoAutoplayBlocked = true;
+              this.audioAutoplayBlocked = true;
+              this.setupUserGestureUnlock();
+              return;
+            }
+
+            // Unmuted autoplay blocked (e.g. Chrome Incognito): try muted autoplay fallback
+            this.audioAutoplayBlocked = true;
             video.muted = true;
-            video
-              .play()
-              .then(() => {
-                this.videoPlaying = true;
-              })
-              .catch(() => {
-                this.videoPlaying = false;
-              });
+            const mutedPromise = video.play();
+            if (mutedPromise !== undefined) {
+              mutedPromise
+                .then(() => {
+                  // Muted autoplay succeeded (Chrome Incognito)
+                  this.isVideoMuted = true;
+                  this.videoPlaying = true;
+                  this.videoAutoplayBlocked = false;
+                  this.setupUserGestureUnlock();
+                })
+                .catch(() => {
+                  // Muted autoplay also blocked (LibreWolf) - restore unmuted preference for first click
+                  video.muted = this.userManuallyMutedVideo;
+                  this.isVideoMuted = this.userManuallyMutedVideo;
+                  this.videoPlaying = false;
+                  this.videoAutoplayBlocked = true;
+                  this.setupUserGestureUnlock();
+                });
+            }
+          });
+      }
+    }
+
+    startCommentaryPlayback(fromUserGesture = false) {
+      const audio = this.$refs.commentaryAudio as HTMLAudioElement;
+      if (!audio) return;
+
+      if (!this.commentaryStartedOnce) {
+        audio.currentTime = 0;
+        this.commentaryStartedOnce = true;
+      }
+
+      if (fromUserGesture) {
+        this.userManuallyPausedCommentary = false;
+      }
+
+      audio.volume = this.commentaryVolume;
+      audio.muted = this.isCommentaryMuted;
+
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            this.commentaryPlaying = true;
+            this.audioAutoplayBlocked = false;
+            this.maybeCleanupGestureListener();
+          })
+          .catch(() => {
+            this.commentaryPlaying = false;
+            this.audioAutoplayBlocked = true;
             this.setupUserGestureUnlock();
           });
       }
     }
 
     onMainSiteRevealed() {
-      this.$nextTick(() => {
-        const video = this.$refs.mainVideo as HTMLVideoElement;
-        if (video) {
-          // Duck video volume slightly for commentator audio
-          this.videoVolume = 0.3;
-          video.volume = 0.3;
-          this.attemptPlayVideo();
+      const video = this.$refs.mainVideo as HTMLVideoElement;
+      if (video) {
+        // Duck video volume slightly for commentator audio
+        this.videoVolume = 0.3;
+        this.previousVideoVolume = 0.3;
+        video.volume = 0.3;
+        if (!this.userManuallyPausedVideo && video.paused) {
+          this.attemptPlayVideo(false);
         }
+      }
 
-        // Auto start commentator audio
-        const audio = this.$refs.commentaryAudio as HTMLAudioElement;
-        if (audio) {
-          audio.currentTime = 0;
-          audio.volume = this.commentaryVolume;
-          audio.muted = this.isCommentaryMuted;
-          const playPromise = audio.play();
-          if (playPromise !== undefined) {
-            playPromise
-              .then(() => {
-                this.commentaryPlaying = true;
-              })
-              .catch(() => {
-                this.commentaryPlaying = false;
-                this.setupUserGestureUnlock();
-              });
-          }
-        }
-      });
+      if (!this.userManuallyPausedCommentary) {
+        this.startCommentaryPlayback(false);
+      }
     }
 
     setupUserGestureUnlock() {
       if (this.userGestureListener) return;
       this.userGestureListener = () => {
-        const audio = this.$refs.commentaryAudio as HTMLAudioElement;
-        const video = this.$refs.mainVideo as HTMLVideoElement;
-        if (audio && !this.commentaryPlaying) {
-          audio.play().then(() => {
-            this.commentaryPlaying = true;
-          }).catch(() => {});
+        this.unlockAllMediaFromGesture();
+      };
+      window.addEventListener('click', this.userGestureListener);
+      window.addEventListener('keydown', this.userGestureListener);
+      window.addEventListener('touchend', this.userGestureListener);
+    }
+
+    unlockAllMediaFromGesture() {
+      const audio = this.$refs.commentaryAudio as HTMLAudioElement;
+      const video = this.$refs.mainVideo as HTMLVideoElement;
+      this.userInteracted = true;
+
+      if (this.showIntro) {
+        // User clicked during the intro: silently prime audio and video so they unmute & play cleanly
+        if (audio && audio.paused && !this.userManuallyPausedCommentary) {
+          const wasMuted = audio.muted;
+          audio.muted = true;
+          const p = audio.play();
+          if (p !== undefined) {
+            p.then(() => {
+              if (this.showIntro) {
+                audio.pause();
+                audio.currentTime = 0;
+              }
+              audio.muted = this.isCommentaryMuted || wasMuted;
+              this.audioAutoplayBlocked = false;
+            }).catch(() => {});
+          }
         }
-        if (video && this.isVideoMuted) {
+
+        if (video) {
+          if (this.introStep >= 2) {
+            if (!this.userManuallyMutedVideo) {
+              this.isVideoMuted = false;
+              video.muted = false;
+              video.volume = this.videoVolume;
+            }
+            if (video.paused && !this.userManuallyPausedVideo) {
+              this.attemptPlayVideo(true);
+            }
+          } else if (video.paused) {
+            const wasMuted = video.muted;
+            video.muted = true;
+            const vp = video.play();
+            if (vp !== undefined) {
+              vp.then(() => {
+                if (this.showIntro && this.introStep < 2) {
+                  video.pause();
+                }
+                video.muted = this.isVideoMuted || wasMuted;
+                this.videoAutoplayBlocked = false;
+              }).catch(() => {});
+            }
+          }
+        }
+        return;
+      }
+
+      // Main page is already revealed: unmute video & start any browser-blocked media synchronously
+      if (video) {
+        if (!this.userManuallyMutedVideo && this.isVideoMuted) {
           this.isVideoMuted = false;
           video.muted = false;
-          video.volume = 0.3;
-          this.videoVolume = 0.3;
+          this.videoVolume = this.previousVideoVolume || 0.3;
+          video.volume = this.videoVolume;
         }
-        if (video && video.paused && this.shouldBePlaying) {
-          this.attemptPlayVideo();
+        if (video.paused && !this.userManuallyPausedVideo && (this.shouldBePlaying || this.videoAutoplayBlocked)) {
+          this.attemptPlayVideo(true);
+        } else {
+          this.videoAutoplayBlocked = false;
         }
+      }
+
+      if (audio) {
+        if (audio.paused && !this.userManuallyPausedCommentary && this.audioAutoplayBlocked) {
+          this.startCommentaryPlayback(true);
+        } else if (!audio.paused) {
+          this.audioAutoplayBlocked = false;
+        }
+      }
+
+      this.maybeCleanupGestureListener();
+    }
+
+    maybeCleanupGestureListener() {
+      if (!this.showIntro && this.userInteracted && !this.videoAutoplayBlocked && !this.audioAutoplayBlocked) {
         this.removeUserGestureListener();
-      };
-      window.addEventListener('click', this.userGestureListener, { once: true });
-      window.addEventListener('keydown', this.userGestureListener, { once: true });
+      }
     }
 
     removeUserGestureListener() {
       if (this.userGestureListener) {
         window.removeEventListener('click', this.userGestureListener);
         window.removeEventListener('keydown', this.userGestureListener);
+        window.removeEventListener('touchend', this.userGestureListener);
         this.userGestureListener = null;
       }
     }
 
     onVideoPlay() {
       this.videoPlaying = true;
+      this.isSeeking = false;
+      this.videoAutoplayBlocked = false;
     }
 
     onVideoPause() {
@@ -881,15 +1090,24 @@
     }
 
     onVideoCanPlay() {
-      if (this.shouldBePlaying && !this.videoPlaying && !this.isSeeking) {
-        this.attemptPlayVideo();
+      if (
+        this.shouldBePlaying &&
+        !this.videoPlaying &&
+        !this.isSeeking &&
+        !this.videoAutoplayBlocked &&
+        !this.userManuallyPausedVideo
+      ) {
+        this.attemptPlayVideo(this.userInteracted);
       }
     }
 
     onVideoSeeked() {
       this.isSeeking = false;
-      if (this.shouldBePlaying) {
-        this.attemptPlayVideo();
+      if (this.shouldBePlaying && !this.userManuallyPausedVideo) {
+        const video = this.$refs.mainVideo as HTMLVideoElement;
+        if (video && video.paused) {
+          this.attemptPlayVideo(this.userInteracted);
+        }
       }
     }
 
@@ -897,45 +1115,64 @@
       const video = this.$refs.mainVideo as HTMLVideoElement;
       if (!video) return;
       this.videoDuration = video.duration;
-      if (this.pendingStartTime !== null && this.pendingStartTime > 0) {
-        const target = this.pendingStartTime;
-        this.pendingStartTime = null;
-        this.isSeeking = true;
-        video.currentTime = target;
-      } else if (this.shouldBePlaying) {
-        this.attemptPlayVideo();
+      this.applyClipStartTime(video);
+      if (this.shouldBePlaying && !this.userManuallyPausedVideo && video.paused) {
+        this.attemptPlayVideo(this.userInteracted);
       }
     }
 
     selectClip(index: number) {
       if (index === this.activeClipIndex) return;
+      this.userInteracted = true;
+      this.userManuallyPausedVideo = false;
       this.activeClipIndex = index;
       this.shouldBePlaying = true;
-      this.pendingStartTime = this.activeReplay.startTime;
+      this.initialStartApplied = false;
+      this.isSeeking = false;
+      this.videoDuration = 0;
+      this.videoCurrentTime = 0;
+
+      if (!this.userManuallyMutedVideo) {
+        this.isVideoMuted = false;
+      }
+
       this.$nextTick(() => {
         const video = this.$refs.mainVideo as HTMLVideoElement;
-        if (video) {
-          if (!isNaN(video.duration) && video.duration > 0) {
-            if (this.activeReplay.startTime > 0) {
-              this.isSeeking = true;
-              video.currentTime = this.activeReplay.startTime;
-              this.pendingStartTime = null;
-            } else {
-              this.attemptPlayVideo();
-            }
-          }
-        }
+        if (!video) return;
+        video.muted = this.isVideoMuted;
+        video.volume = this.videoVolume;
+        video.load();
+        video.play()
+          .then(() => {
+            this.videoPlaying = true;
+            this.videoAutoplayBlocked = false;
+          })
+          .catch(() => {});
       });
     }
 
     toggleVideoPlay() {
       const video = this.$refs.mainVideo as HTMLVideoElement;
       if (!video) return;
+
+      // If browser muted autoplay was active and user clicks video for the first time,
+      // unmute & let global gesture handler start commentary instead of pausing the video!
+      if (!this.userInteracted && this.audioAutoplayBlocked && this.isVideoMuted && !this.userManuallyMutedVideo && !video.paused) {
+        this.isVideoMuted = false;
+        video.muted = false;
+        this.videoVolume = this.previousVideoVolume || 0.3;
+        video.volume = this.videoVolume;
+        return;
+      }
+
+      this.userInteracted = true;
       if (video.paused) {
         this.shouldBePlaying = true;
-        this.attemptPlayVideo();
+        this.userManuallyPausedVideo = false;
+        this.attemptPlayVideo(true);
       } else {
         this.shouldBePlaying = false;
+        this.userManuallyPausedVideo = true;
         video.pause();
         this.videoPlaying = false;
       }
@@ -954,9 +1191,13 @@
       if (video) {
         video.volume = val;
         this.videoVolume = val;
-        if (val > 0 && this.isVideoMuted) {
-          video.muted = false;
-          this.isVideoMuted = false;
+        if (val > 0) {
+          this.previousVideoVolume = val;
+          if (this.isVideoMuted) {
+            video.muted = false;
+            this.isVideoMuted = false;
+            this.userManuallyMutedVideo = false;
+          }
         }
       }
     }
@@ -964,14 +1205,19 @@
     toggleVideoMute() {
       const video = this.$refs.mainVideo as HTMLVideoElement;
       if (!video) return;
+      this.userInteracted = true;
       if (this.isVideoMuted || this.videoVolume === 0) {
         this.isVideoMuted = false;
+        this.userManuallyMutedVideo = false;
         video.muted = false;
-        this.videoVolume = this.previousVideoVolume || 0.5;
+        this.videoVolume = this.previousVideoVolume || 0.3;
         video.volume = this.videoVolume;
       } else {
-        this.previousVideoVolume = this.videoVolume;
+        if (this.videoVolume > 0) {
+          this.previousVideoVolume = this.videoVolume;
+        }
         this.isVideoMuted = true;
+        this.userManuallyMutedVideo = true;
         video.muted = true;
       }
     }
@@ -1021,11 +1267,11 @@
     toggleCommentary() {
       const audio = this.$refs.commentaryAudio as HTMLAudioElement;
       if (!audio) return;
+      this.userInteracted = true;
       if (audio.paused) {
-        audio.play().then(() => {
-          this.commentaryPlaying = true;
-        });
+        this.startCommentaryPlayback(true);
       } else {
+        this.userManuallyPausedCommentary = true;
         audio.pause();
         this.commentaryPlaying = false;
       }
@@ -1042,7 +1288,17 @@
       const video = this.$refs.mainVideo as HTMLVideoElement;
       if (video) {
         this.videoCurrentTime = video.currentTime;
+        this.isSeeking = false;
       }
+    }
+
+    onCommentaryPlay() {
+      this.commentaryPlaying = true;
+      this.audioAutoplayBlocked = false;
+    }
+
+    onCommentaryPause() {
+      this.commentaryPlaying = false;
     }
 
     onCommentaryTimeUpdate() {
@@ -1087,6 +1343,7 @@
     }
 
     navigatePlacement(rank: number) {
+      this.userInteracted = true;
       const year = this.$route.params.year || '2026';
       this.$router.push(`/${year}/${rank}`).catch(() => {});
     }
@@ -1154,6 +1411,20 @@
   top: 20px;
   right: 20px;
   z-index: 1010;
+}
+
+.intro-audio-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 102, 170, 0.3);
+  border-radius: 999px;
+  padding: 6px 14px;
+  pointer-events: none;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
 }
 
 .intro-content-container {
@@ -1451,7 +1722,56 @@
   justify-content: center;
   cursor: pointer;
   z-index: 3;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.video-autoplay-hint {
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid rgba(255, 102, 170, 0.6);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.autoplay-unlock-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 95;
+  background: rgba(24, 22, 32, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid #ff66aa;
+  border-radius: 999px;
+  cursor: pointer;
+  outline: none;
+  max-width: calc(100vw - 32px);
+  white-space: nowrap;
+  animation: pulsePinkBorder 2.2s ease-in-out infinite;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.autoplay-unlock-banner:hover {
+  background: rgba(40, 26, 46, 0.98);
+  transform: translateX(-50%) scale(1.03);
+}
+
+@media (max-width: 600px) {
+  .autoplay-unlock-banner {
+    white-space: normal;
+    text-align: center;
+    border-radius: 14px;
+    bottom: 16px;
+  }
+}
+
+@keyframes pulsePinkBorder {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.65), 0 0 0 0 rgba(255, 102, 170, 0.45);
+  }
+  50% {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.75), 0 0 18px 2px rgba(255, 102, 170, 0.65);
+  }
 }
 
 .video-bottom-controls {
