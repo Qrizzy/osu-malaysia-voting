@@ -329,7 +329,7 @@
               2026 Top 15 results and player showcases will be published here once voting closes!
             </div>
 
-            <div class="d-flex flex-wrap justify-center mb-8 px-4" style="gap: 12px;">
+            <div class="d-flex justify-center mb-8 px-4">
               <v-btn
                 rounded
                 color="#ff66aa"
@@ -341,17 +341,6 @@
               >
                 Vote at omy.sh145.site
                 <v-icon right small>mdi-open-in-new</v-icon>
-              </v-btn>
-
-              <v-btn
-                rounded
-                outlined
-                color="#ff66aa"
-                to="/2026/7"
-                class="text-none font-weight-bold"
-              >
-                <v-icon left>mdi-play-circle</v-icon>
-                Preview Top 15 Result (7th Place – AHotDawg)
               </v-btn>
             </div>
           </v-tab-item>

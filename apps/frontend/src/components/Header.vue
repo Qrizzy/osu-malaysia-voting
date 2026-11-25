@@ -8,7 +8,7 @@
     <!-- Desktop navigation -->
     <v-toolbar-items class="nav hidden-sm-and-down">
       <v-btn to="/" text>Home</v-btn>
-      <v-btn to="/past" text>Results Archive</v-btn>
+      <v-btn to="/past" text>Past results</v-btn>
       <v-btn to="/about" text>About</v-btn>
 
       <v-divider vertical></v-divider>
@@ -36,7 +36,7 @@
 
         <v-list>
           <v-list-item to="/">Home</v-list-item>
-          <v-list-item to="/past">Results Archive</v-list-item>
+          <v-list-item to="/past">Past results</v-list-item>
           <v-list-item to="/about">About</v-list-item>
           <v-list-item href="https://omy.sh145.site" target="_blank" rel="noopener noreferrer">
             <span class="pink--text text--accent-2">Vote Site</span>

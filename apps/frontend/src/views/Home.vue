@@ -43,7 +43,7 @@
 
             <div class="d-flex align-center justify-center">
               <v-btn large to="/past" class="ml-sm-3" text>
-                Results archive
+                Past results
               </v-btn>
 
               <v-btn large to="/about" class="ml-2 ml-sm-3" text>
