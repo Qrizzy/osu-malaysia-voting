@@ -8,7 +8,7 @@
               osu! Malaysia Top 15 Players 2026
             </h1>
             <div class="white--text subtitle-1 text-center mb-1">
-              Historical archive (2014–2025) &amp; 2026 Top 15 results showcase
+              Past year results &amp; 2026 Top 15 results showcase
             </div>
             <div class="grey--text subtitle-2 mb-4 text-center">
               {{ hasVotingEnded ? '2026 voting has closed — results coming soon!' : '2026 voting is hosted at omy.sh145.site' }}
