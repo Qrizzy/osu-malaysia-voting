@@ -47,8 +47,14 @@
 
           <!-- Player Name and Stats: Slides in from circle at Step 2 (remains exactly as before) -->
           <div v-if="introStep >= 2" class="intro-player-info ml-5">
-            <h1 class="intro-player-name text-h3 font-weight-bold white--text">
-              {{ player.username }}
+            <h1 class="intro-player-name text-h3 font-weight-bold white--text d-flex align-baseline flex-wrap">
+              <span>{{ player.username }}</span>
+              <span
+                v-if="player.globalRank"
+                class="intro-global-rank text-h6 grey--text text--lighten-1 font-weight-medium ml-2"
+              >
+                {{ player.globalRank }}
+              </span>
             </h1>
             <div class="intro-player-stats text-h5 grey--text text--lighten-1 font-weight-medium mt-1">
               {{ player.countryRank }} | {{ player.votes }}
@@ -69,8 +75,8 @@
       </div>
     </transition>
 
-    <!-- SCREEN EDGE PLACEMENT NAVIGATION (Most Left: 8th, Most Right: 6th) -->
-    <aside class="screen-edge-nav screen-edge-left" v-if="!showIntro">
+    <!-- SCREEN EDGE PLACEMENT NAVIGATION (Left: next lower rank up to #15, Right: next higher rank down to #1) -->
+    <aside class="screen-edge-nav screen-edge-left" v-if="!showIntro && currentRankNum < 15">
       <button
         class="side-nav-pill side-nav-pill-left d-flex flex-column align-center justify-center"
         @click="navigatePlacement(nextLowerPlacement)"
@@ -83,7 +89,7 @@
       </button>
     </aside>
 
-    <aside class="screen-edge-nav screen-edge-right" v-if="!showIntro">
+    <aside class="screen-edge-nav screen-edge-right" v-if="!showIntro && currentRankNum > 1">
       <button
         class="side-nav-pill side-nav-pill-right d-flex flex-column align-center justify-center"
         @click="navigatePlacement(nextHigherPlacement)"
@@ -100,7 +106,7 @@
     <v-container fluid class="px-2 px-sm-6 py-4 main-content-wrap" :class="{ 'intro-active': showIntro }">
       <!-- TOP BAR: Player Details (Storyboard 3 top) -->
       <div class="d-flex align-center justify-space-between flex-wrap mb-4 top-player-bar">
-        <!-- Left: Dashed rank circle + square avatar + player name -->
+        <!-- Left: Dashed rank circle + square avatar + player name & global rank -->
         <div class="d-flex align-center mb-2">
           <!-- Mini spinning dashed rank circle -->
           <div class="mini-dashed-rank mr-3">
@@ -113,11 +119,17 @@
             <img :src="player.avatarUrl" :alt="player.username" />
           </v-avatar>
 
-          <!-- Player Name -->
-          <div>
+          <!-- Player Name + smaller inline Global Rank -->
+          <div class="d-flex align-baseline flex-wrap">
             <h1 class="text-h4 text-sm-h3 font-weight-black white--text player-headline mb-0">
               {{ player.username }}
             </h1>
+            <span
+              v-if="player.globalRank"
+              class="ml-2 text-subtitle-1 text-sm-h6 font-weight-bold grey--text text--lighten-1 global-rank-inline"
+            >
+              {{ player.globalRank }}
+            </span>
           </div>
         </div>
 
@@ -426,6 +438,77 @@
         </v-btn>
       </div>
 
+      <!-- 2026 TOP PP PLAYS CARD GRID -->
+      <div v-if="topPlays2026.length > 0" class="top-plays-section my-5">
+        <div class="d-flex align-center justify-space-between mb-2 px-1">
+          <span class="caption font-weight-bold text-uppercase grey--text text--lighten-1" style="letter-spacing: 0.9px;">
+            Top PP Plays in 2026
+          </span>
+          <span class="caption grey--text">2026 Snapshot</span>
+        </div>
+
+        <v-row dense>
+          <v-col
+            cols="12"
+            sm="4"
+            v-for="(play, pIdx) in topPlays2026"
+            :key="'top-play-' + pIdx"
+          >
+            <a
+              :href="play.mapUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="top-play-card d-flex flex-column justify-space-between pa-3 text-decoration-none"
+              :title="`${play.artist} - ${play.title} [${play.difficulty}]`"
+            >
+              <!-- 60% Blurred & 20% Dimmed Map Cover Background -->
+              <div
+                class="top-play-card-bg"
+                :style="{ backgroundImage: `url(${play.coverUrl})` }"
+              ></div>
+              <div class="top-play-card-overlay"></div>
+
+              <!-- Foreground Content -->
+              <div class="top-play-card-content d-flex align-start justify-space-between">
+                <div class="top-play-title-wrap pr-2">
+                  <div class="subtitle-2 font-weight-bold white--text text-truncate">
+                    {{ play.artist }} - {{ play.title }}
+                  </div>
+                  <div class="caption grey--text text--lighten-2 text-truncate">
+                    [{{ play.difficulty }}]
+                  </div>
+                </div>
+                <span :class="['play-grade-badge', gradeBadgeClass(play.grade)]">
+                  {{ play.grade }}
+                </span>
+              </div>
+
+              <div class="top-play-card-content d-flex align-center justify-space-between pt-2 mt-2 top-play-footer">
+                <div class="d-flex align-center flex-wrap" style="gap: 4px;">
+                  <span
+                    v-for="(mod, mIdx) in play.mods"
+                    :key="'mod-' + pIdx + '-' + mIdx"
+                    :class="['play-mod-badge', modBadgeClass(mod)]"
+                  >
+                    {{ mod }}
+                  </span>
+                  <span class="caption white--text font-weight-medium ml-1">
+                    {{ play.accuracy }}
+                  </span>
+                  <span v-if="play.date" class="caption grey--text text--lighten-2 ml-1">
+                    • {{ play.date }}
+                  </span>
+                </div>
+
+                <span class="play-pp-badge font-weight-black">
+                  {{ play.pp }}pp
+                </span>
+              </div>
+            </a>
+          </v-col>
+        </v-row>
+      </div>
+
       <!-- VOTER'S REMARKS (Storyboard 3 -> 4 & Clean Hover Peeking) -->
       <div
         class="remarks-interactive-area my-6"
@@ -559,26 +642,13 @@
 
 <script lang="ts">
   import { Component, Vue, Watch } from 'vue-property-decorator';
-
-  interface ReplayClip {
-    id: number;
-    title: string;
-    artist: string;
-    songTitle: string;
-    difficulty: string;
-    fullTitle: string;
-    src: string;
-    startTime: number;
-    mapUrl: string;
-  }
-
-  interface VoterRemarkItem {
-    id: number;
-    username: string;
-    avatarUrl: string;
-    ranking: number;
-    remarks: string;
-  }
+  import {
+    getPlayerResult2026,
+    PlayerResultEntry,
+    ReplayClip,
+    TopPlayItem,
+    VoterRemarkItem
+  } from '../data/results2026';
 
   @Component
   export default class PlayerResult extends Vue {
@@ -622,106 +692,54 @@
     showRemarks = false;
     isHoveringRemarks = false;
 
-    // Player Data
-    player = {
-      id: 15271985,
-      username: 'AHotDawg',
-      avatarUrl: 'https://a.ppy.sh/15271985',
-      coverUrl: 'https://assets.ppy.sh/user-profile-covers/15271985/64021c98d5db920789439a4de0062143e227584a31d9241034fe9bd1b18d204e.jpeg',
-      countryRank: 'MY#24',
-      votes: '85 votes'
-    };
-
-    commentatorName = 'Johan (Duox)';
-    commentaryAudioSrc = '/players%20submissions/10/ecoelement.mp3';
-
-    replays: ReplayClip[] = [
-      {
-        id: 1,
-        title: 'Replay 1',
-        artist: 'Tatsh',
-        songTitle: 'Xevel',
-        difficulty: 'CAN YOU HEAR MY SOUL AND DARKNESS',
-        fullTitle: 'Tatsh - Xevel [CAN YOU HEAR MY SOUL AND DARKNESS]',
-        src: '/players%20submissions/10/replays/eco1.mp4',
-        startTime: 100, // 01:40
-        mapUrl: 'https://osu.ppy.sh/beatmapsets/1174491#osu/2449759'
-      },
-      {
-        id: 2,
-        title: 'Replay 2',
-        artist: 'DystopiaGround',
-        songTitle: 'AugoEidEs',
-        difficulty: 'oyasumi',
-        fullTitle: 'DystopiaGround - AugoEidEs [oyasumi]',
-        src: '/players%20submissions/10/replays/eco2.mp4',
-        startTime: 340, // 05:40
-        mapUrl: 'https://osu.ppy.sh/beatmapsets/346104#osu/764082'
-      },
-      {
-        id: 3,
-        title: 'Replay 3',
-        artist: 'Manticora',
-        songTitle: 'Humiliation Supreme',
-        difficulty: 'Extra',
-        fullTitle: 'Manticora - Humiliation Supreme [Extra]',
-        src: '/players%20submissions/10/replays/eco3.mp4',
-        startTime: 0, // 00:00
-        mapUrl: 'https://osu.ppy.sh/beatmapsets/2364885#osu/5109853'
-      }
-    ];
-
-    skinLink = 'https://drive.google.com/file/d/17iR9olNFSnm1a7dnn3JM9NywUoLxiQwu/view';
-
-    scriptParagraphs: string[] = [
-      "Here’s the updated script with the added detail about this being Jason’s first time in the top 10 of osu! Malaysia:",
-      "Coming up at 7th place is Jason, a player renowned for his mastery of the Hidden mod and precise aim on high-star-rating maps. 2024 has been a breakout year for Jason, as he achieved a top 6 finish in the osu! Malaysia Tournament and his first time ever breaking into the top 10 list of osu Malaysia players !",
-      "Among his standout achievements this year is his incredible full combo on Xevel's AugoEidEs, a map notorious for its demanding aim and unforgiving patterns. This play highlighted his exceptional consistency and reading ability, earning its place as one of his best performances of the year.",
-      'With his talent and determination, Jason continues to climb the ranks. Let’s see what he brings to the table this year. Good luck, Jason!"',
-      "Let me know if there’s anything else you’d like to adjust!"
-    ];
-
-    voterRemarks: VoterRemarkItem[] = [
-      {
-        id: 3995630,
-        username: 'Rampax',
-        avatarUrl: 'https://a.ppy.sh/3995630',
-        ranking: 6,
-        remarks: 'Incredible consistency and tournament plays throughout the year, especially that AugoEidEs FC! Truly deserving of top 10.'
-      },
-      {
-        id: 8226107,
-        username: 'Chiyuu',
-        avatarUrl: 'https://a.ppy.sh/8226107',
-        ranking: 7,
-        remarks: 'Super clean HD aim player and huge breakthrough in the OMT tourney this year. Great teammate and solid growth!'
-      },
-      {
-        id: 10343292,
-        username: 'mint breeze',
-        avatarUrl: 'https://a.ppy.sh/10343292',
-        ranking: 8,
-        remarks: 'Insane reading and high-star aim. Jason has been grinding like crazy in 2024 and his skill ceiling is ridiculously high.'
-      },
-      {
-        id: 2932510,
-        username: 'wuhua',
-        avatarUrl: 'https://a.ppy.sh/2932510',
-        ranking: 7,
-        remarks: 'One of the most reliable HD aimers in the country right now. Excited to see him push even further in future tournaments!'
-      },
-      {
-        id: 9364594,
-        username: 'Sagisawa Arisu',
-        avatarUrl: 'https://a.ppy.sh/9364594',
-        ranking: 9,
-        remarks: 'Solid all-round performance and tournament consistency. Very impressive jump into the top 10 this year, keep it up!'
-      }
-    ];
-
     get currentRankNum(): number {
       const r = parseInt(this.$route.params.rank, 10);
-      return isNaN(r) ? 7 : r;
+      if (isNaN(r)) return 7;
+      return Math.min(15, Math.max(1, r));
+    }
+
+    get resultEntry(): PlayerResultEntry {
+      return getPlayerResult2026(this.currentRankNum);
+    }
+
+    get player() {
+      return {
+        id: this.resultEntry.id,
+        username: this.resultEntry.username,
+        avatarUrl: this.resultEntry.avatarUrl,
+        coverUrl: this.resultEntry.coverUrl,
+        globalRank: this.resultEntry.globalRank,
+        countryRank: this.resultEntry.countryRank,
+        votes: this.resultEntry.votes
+      };
+    }
+
+    get commentatorName(): string {
+      return this.resultEntry.commentatorName;
+    }
+
+    get commentaryAudioSrc(): string {
+      return this.resultEntry.commentaryAudioSrc;
+    }
+
+    get replays(): ReplayClip[] {
+      return this.resultEntry.replays;
+    }
+
+    get skinLink(): string {
+      return this.resultEntry.skinLink;
+    }
+
+    get scriptParagraphs(): string[] {
+      return this.resultEntry.scriptParagraphs;
+    }
+
+    get topPlays2026(): TopPlayItem[] {
+      return this.resultEntry.topPlays2026;
+    }
+
+    get voterRemarks(): VoterRemarkItem[] {
+      return this.resultEntry.voterRemarks;
     }
 
     get displayRank(): string {
@@ -729,13 +747,29 @@
     }
 
     get nextLowerPlacement(): number {
-      // "<" button goes to 8th (if on 7th)
-      return Math.min(10, this.currentRankNum + 1);
+      // "<" button goes toward #15 (e.g. #8 when viewing #7)
+      return Math.min(15, this.currentRankNum + 1);
     }
 
     get nextHigherPlacement(): number {
-      // ">" button goes to 6th (if on 7th)
+      // ">" button goes toward #1 (e.g. #6 when viewing #7)
       return Math.max(1, this.currentRankNum - 1);
+    }
+
+    gradeBadgeClass(grade: string): string {
+      const g = (grade || '').toUpperCase();
+      if (g === 'XH' || g === 'SH') return 'grade-silver';
+      if (g === 'X' || g === 'S') return 'grade-gold';
+      return 'grade-green';
+    }
+
+    modBadgeClass(mod: string): string {
+      const m = (mod || '').toUpperCase();
+      if (m === 'HD') return 'mod-hd';
+      if (m === 'DT' || m === 'NC') return 'mod-dt';
+      if (m === 'HR') return 'mod-hr';
+      if (m === 'EZ' || m === 'FL') return 'mod-ez';
+      return 'mod-default';
     }
 
     get activeReplay(): ReplayClip {
@@ -1880,6 +1914,153 @@
 .osu-mode-icon {
   display: inline-block;
   vertical-align: middle;
+}
+
+.global-rank-inline {
+  opacity: 0.85;
+  letter-spacing: 0.3px;
+}
+
+/* TOP 2026 PP PLAYS CARD GRID */
+.top-plays-section {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-play-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  min-height: 92px;
+  background-color: #181820;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.top-play-card:hover {
+  transform: translateY(-2px);
+  border-color: #ff66aa;
+  box-shadow: 0 4px 18px rgba(255, 102, 170, 0.32);
+}
+
+.top-play-card-bg {
+  position: absolute;
+  inset: -8px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px) brightness(0.8);
+  transform: scale(1.06);
+  z-index: 0;
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.top-play-card:hover .top-play-card-bg {
+  filter: blur(4px) brightness(0.88);
+  transform: scale(1.08);
+}
+
+.top-play-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(16, 16, 22, 0.22) 0%, rgba(10, 10, 16, 0.48) 100%);
+  z-index: 1;
+}
+
+.top-play-card-content {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.top-play-title-wrap {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.top-play-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.play-grade-badge {
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  line-height: 1.2;
+  flex-shrink: 0;
+  text-shadow: none;
+}
+
+.play-grade-badge.grade-silver {
+  background: rgba(30, 36, 46, 0.8);
+  color: #e2e8f0;
+  border-color: rgba(226, 232, 240, 0.55);
+}
+
+.play-grade-badge.grade-gold {
+  background: rgba(42, 34, 14, 0.8);
+  color: #facc15;
+  border-color: rgba(250, 204, 21, 0.55);
+}
+
+.play-grade-badge.grade-green {
+  background: rgba(18, 38, 26, 0.8);
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.5);
+}
+
+.play-mod-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  line-height: 1.25;
+  text-shadow: none;
+}
+
+.play-mod-badge.mod-hd {
+  background: rgba(42, 34, 12, 0.82);
+  color: #facc15;
+  border-color: rgba(250, 204, 21, 0.45);
+}
+
+.play-mod-badge.mod-dt {
+  background: rgba(36, 20, 48, 0.82);
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.45);
+}
+
+.play-mod-badge.mod-hr {
+  background: rgba(48, 18, 22, 0.82);
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+.play-mod-badge.mod-ez {
+  background: rgba(18, 42, 28, 0.82);
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.45);
+}
+
+.play-mod-badge.mod-default {
+  background: rgba(24, 24, 34, 0.82);
+  color: #e5e7eb;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.play-pp-badge {
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: rgba(24, 14, 24, 0.85);
+  border: 1px solid rgba(255, 102, 170, 0.65);
+  color: #ff80bf;
+  line-height: 1.25;
+  flex-shrink: 0;
+  text-shadow: none;
 }
 
 /* REMARKS INTERACTIVE DIVIDER & HOVER PEEKING */

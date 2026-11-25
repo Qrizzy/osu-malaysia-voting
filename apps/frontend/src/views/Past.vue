@@ -323,11 +323,26 @@
 
           <v-tab-item value="2026">
             <v-card-title>2026 rankings</v-card-title>
-            <v-card-subtitle>osu! Malaysia top 10 voting.</v-card-subtitle>
+            <v-card-subtitle>osu! Malaysia Top 15 Rankings (no honorable mentions).</v-card-subtitle>
 
-            <div class="text-subtitle-1 text-sm-h5 grey--text d-flex align-center justify-center text-center my-10 mx-5">The data for this year has not been projected yet. Make sure to cast your votes before the voting period ends!</div>
+            <div class="text-subtitle-1 text-sm-h5 grey--text d-flex align-center justify-center text-center my-10 mx-5">
+              2026 Top 15 results and player showcases will be published here once voting closes!
+            </div>
 
-            <div class="d-flex justify-center mb-8">
+            <div class="d-flex flex-wrap justify-center mb-8 px-4" style="gap: 12px;">
+              <v-btn
+                rounded
+                color="#ff66aa"
+                dark
+                href="https://omy.sh145.site"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-none font-weight-bold"
+              >
+                Vote at omy.sh145.site
+                <v-icon right small>mdi-open-in-new</v-icon>
+              </v-btn>
+
               <v-btn
                 rounded
                 outlined
@@ -336,7 +351,7 @@
                 class="text-none font-weight-bold"
               >
                 <v-icon left>mdi-play-circle</v-icon>
-                Preview Top 10 Result (7th Place – AHotDawg)
+                Preview Top 15 Result (7th Place – AHotDawg)
               </v-btn>
             </div>
           </v-tab-item>
@@ -348,7 +363,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Vue, Watch } from 'vue-property-decorator';
   import Leaderboard from '../components/Leaderboard.vue';
 
   @Component({
@@ -358,6 +373,18 @@
   })
   export default class Past extends Vue {
     tab = '2025';
+
+    mounted() {
+      this.syncTabFromHash();
+    }
+
+    @Watch('$route.hash')
+    syncTabFromHash() {
+      const hashYear = (this.$route.hash || '').replace('#', '');
+      if (hashYear && ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2024', '2025', '2026'].includes(hashYear)) {
+        this.tab = hashYear;
+      }
+    }
     leaderboards = {
       '2025': [{
         rank: 1,

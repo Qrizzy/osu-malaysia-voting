@@ -19,7 +19,7 @@
             </v-avatar>
 
             <v-badge bordered color="red" content="owc" inline :value="user.owc ? user.owc : false">
-              <v-badge bordered color="grey" content="HM" inline :value="user.hm ? user.hm : (user.rank === 11 || user.rank === 12)">
+              <v-badge bordered color="grey" content="HM" inline :value="Boolean(user.hm)">
                 <span class="ml-2 ml-sm-3">{{ user.username }}</span>
               </v-badge>
             </v-badge>
@@ -27,6 +27,17 @@
         </td>
         <td v-if="hasPoints">{{ user.points !== undefined ? user.points : '-' }}</td>
         <td style="text-align: right; white-space: nowrap;">
+          <v-btn
+            v-if="resultYear"
+            x-small
+            outlined
+            rounded
+            color="#ff66aa"
+            class="mr-1 text-none font-weight-bold"
+            :to="`/${resultYear}/${user.rank}`"
+          >
+            Result
+          </v-btn>
           <v-btn x-small text @click="openProfile(user.osuId)">profile</v-btn>
         </td>
       </tr>
@@ -63,6 +74,7 @@
   @Component
   export default class Leaderboard extends Vue {
     @Prop() leaderboard: User[];
+    @Prop({ default: '' }) resultYear!: string;
 
     get hasPoints(): boolean {
       return Boolean(this.leaderboard && this.leaderboard.some(user => user.points !== undefined));

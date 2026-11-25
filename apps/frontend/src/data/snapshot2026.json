@@ -1,0 +1,53 @@
+{
+  "year": 2026,
+  "generatedAt": null,
+  "players": {
+    "7": {
+      "id": 15271985,
+      "username": "AHotDawg",
+      "avatarUrl": "https://a.ppy.sh/15271985",
+      "coverUrl": "https://assets.ppy.sh/user-profile-covers/15271985/64021c98d5db920789439a4de0062143e227584a31d9241034fe9bd1b18d204e.jpeg",
+      "globalRank": "#1,420",
+      "countryRank": "MY#24",
+      "votes": "85 votes",
+      "topPlays2026": [
+        {
+          "title": "AugoEidEs",
+          "artist": "DystopiaGround",
+          "difficulty": "oyasumi",
+          "coverUrl": "https://assets.ppy.sh/beatmaps/346104/covers/card@2x.jpg",
+          "mapUrl": "https://osu.ppy.sh/beatmapsets/346104#osu/764082",
+          "mods": ["HD"],
+          "grade": "SH",
+          "accuracy": "99.18%",
+          "pp": 612,
+          "date": "Preview"
+        },
+        {
+          "title": "Xevel",
+          "artist": "Tatsh",
+          "difficulty": "CAN YOU HEAR MY SOUL AND DARKNESS",
+          "coverUrl": "https://assets.ppy.sh/beatmaps/1174491/covers/card@2x.jpg",
+          "mapUrl": "https://osu.ppy.sh/beatmapsets/1174491#osu/2449759",
+          "mods": ["HD"],
+          "grade": "SH",
+          "accuracy": "99.52%",
+          "pp": 589,
+          "date": "Preview"
+        },
+        {
+          "title": "Humiliation Supreme",
+          "artist": "Manticora",
+          "difficulty": "Extra",
+          "coverUrl": "https://assets.ppy.sh/beatmaps/2364885/covers/card@2x.jpg",
+          "mapUrl": "https://osu.ppy.sh/beatmapsets/2364885#osu/5109853",
+          "mods": ["HD", "HR"],
+          "grade": "S",
+          "accuracy": "98.41%",
+          "pp": 554,
+          "date": "Preview"
+        }
+      ]
+    }
+  }
+}

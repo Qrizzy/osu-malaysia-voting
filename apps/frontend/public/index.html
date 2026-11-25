@@ -1,174 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>osu! Malaysia top 10 voting</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css">
 
-    <link rel="icon" type="image/svg+xml" href="<%= BASE_URL %>favicon/favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>favicon/apple-touch-icon.png?v=5ABLMBllxQ">
-    <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon/favicon-32x32.png?v=5ABLMBllxQ">
-    <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>favicon/favicon-16x16.png?v=5ABLMBllxQ">
-    <link rel="manifest" href="<%= BASE_URL %>favicon/site.webmanifest?v=5ABLMBllxQ">
-    <link rel="mask-icon" href="<%= BASE_URL %>favicon/safari-pinned-tab.svg?v=5ABLMBllxQ" color="#5bbad5">
-    <link rel="shortcut icon" href="<%= BASE_URL %>favicon/favicon.ico?v=5ABLMBllxQ">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="<%= BASE_URL %>favicon/browserconfig.xml?v=5ABLMBllxQ">
-    <meta name="theme-color" content="#ff66aa">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="osu! Malaysia Yearly Top 10 Players">
-    <meta property="og:description" content="Annual community voting and past results for the top 10 osu! Malaysia players.">
-    <meta property="og:image" content="https://osumy.chiyuu.me/favicon/apple-touch-icon.png">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>osu! Malaysia Top Players Archive & 2026 Results</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css">
 
-    <style>
-      html, body {
-        overflow-y: auto !important;
-        background-color: #121212;
-        padding: 0;
-        margin: 0;
-      }
+  <link rel="icon" type="image/svg+xml" href="<%= BASE_URL %>favicon/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>favicon/apple-touch-icon.png?v=5ABLMBllxQ">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon/favicon-32x32.png?v=5ABLMBllxQ">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>favicon/favicon-16x16.png?v=5ABLMBllxQ">
+  <link rel="manifest" href="<%= BASE_URL %>favicon/site.webmanifest?v=5ABLMBllxQ">
+  <link rel="mask-icon" href="<%= BASE_URL %>favicon/safari-pinned-tab.svg?v=5ABLMBllxQ" color="#5bbad5">
+  <link rel="shortcut icon" href="<%= BASE_URL %>favicon/favicon.ico?v=5ABLMBllxQ">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="<%= BASE_URL %>favicon/browserconfig.xml?v=5ABLMBllxQ">
+  <meta name="theme-color" content="#ff66aa">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="osu! Malaysia Top 15 Players 2026 & History Archive">
+  <meta property="og:description"
+    content="Past results archive (2014–2025) and 2026 Top 15 osu! Malaysia player showcase.">
+  <meta property="og:image" content="https://osumy.chiyuu.me/favicon/apple-touch-icon.png">
 
-      .loading {
-        width: 100%;
-        height: 100vh;
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+  <style>
+    html,
+    body {
+      overflow-y: auto !important;
+      background-color: #121212;
+      padding: 0;
+      margin: 0;
+    }
 
-      .loading-middle {
-        position: relative;
-      }
+    .loading {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .trademark {
-        font-family: "Roboto", sans-serif;
-        font-weight: 300;
-        font-size: 13px;
-        letter-spacing: 3px;
-        color: white;
-        position: absolute;
-        top: 94px;
-        left: 75px;
-        text-align: center;
-      }
+    .loading-middle {
+      position: relative;
+    }
 
-      @keyframes ldio {
-        0% { transform: rotate(0) }
-        100% { transform: rotate(360deg) }
-      }
-      .ldio div { box-sizing: border-box!important }
-      .ldio > div {
-        position: absolute;
-        width: 128px;
-        height: 128px;
-        top: 36px;
-        left: 36px;
-        border-radius: 50%;
-        border: 12px solid #000;
-        border-color: #3c3c3c transparent #3c3c3c transparent;
-        animation: ldio 1s linear infinite;
+    .trademark {
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: white;
+      position: absolute;
+      top: 94px;
+      left: 75px;
+      text-align: center;
+    }
+
+    @keyframes ldio {
+      0% {
+        transform: rotate(0)
       }
 
-      .ldio > div:nth-child(2), .ldio > div:nth-child(4) {
-        width: 100px;
-        height: 100px;
-        top: 50px;
-        left: 50px;
-        animation: ldio 1s linear infinite reverse;
+      100% {
+        transform: rotate(360deg)
       }
-      .ldio > div:nth-child(2) {
-        border-color: transparent #939393 transparent #939393
-      }
-      .ldio > div:nth-child(3) { border-color: transparent }
-      .ldio > div:nth-child(3) div {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform: rotate(45deg);
-      }
-      .ldio > div:nth-child(3) div:before, .ldio > div:nth-child(3) div:after {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        top: -12px;
-        left: 46px;
-        background: #3c3c3c;
-        border-radius: 50%;
-        box-shadow: 0 116px 0 0 #3c3c3c;
-      }
-      .ldio > div:nth-child(3) div:after {
-        left: -12px;
-        top: 46px;
-        box-shadow: 116px 0 0 0 #3c3c3c;
-      }
+    }
 
-      .ldio > div:nth-child(4) { border-color: transparent; }
-      .ldio > div:nth-child(4) div {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform: rotate(45deg);
-      }
-      .ldio > div:nth-child(4) div:before, .ldio > div:nth-child(4) div:after {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        top: -12px;
-        left: 32px;
-        background: #939393;
-        border-radius: 50%;
-        box-shadow: 0 88px 0 0 #939393;
-      }
-      .ldio > div:nth-child(4) div:after {
-        left: -12px;
-        top: 32px;
-        box-shadow: 88px 0 0 0 #939393;
-      }
-      .spinner-double-ring {
-        width: 200px;
-        height: 200px;
-        display: inline-block;
-        overflow: hidden;
-      }
-      .ldio {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transform: translateZ(0) scale(1);
-        backface-visibility: hidden;
-        transform-origin: 0 0;
-      }
-      .ldio div { box-sizing: content-box; }
-    </style>
-  </head>
-  <body>
-    <noscript>
-      <strong>
-        We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+    .ldio div {
+      box-sizing: border-box !important
+    }
+
+    .ldio>div {
+      position: absolute;
+      width: 128px;
+      height: 128px;
+      top: 36px;
+      left: 36px;
+      border-radius: 50%;
+      border: 12px solid #000;
+      border-color: #3c3c3c transparent #3c3c3c transparent;
+      animation: ldio 1s linear infinite;
+    }
+
+    .ldio>div:nth-child(2),
+    .ldio>div:nth-child(4) {
+      width: 100px;
+      height: 100px;
+      top: 50px;
+      left: 50px;
+      animation: ldio 1s linear infinite reverse;
+    }
+
+    .ldio>div:nth-child(2) {
+      border-color: transparent #939393 transparent #939393
+    }
+
+    .ldio>div:nth-child(3) {
+      border-color: transparent
+    }
+
+    .ldio>div:nth-child(3) div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: rotate(45deg);
+    }
+
+    .ldio>div:nth-child(3) div:before,
+    .ldio>div:nth-child(3) div:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      top: -12px;
+      left: 46px;
+      background: #3c3c3c;
+      border-radius: 50%;
+      box-shadow: 0 116px 0 0 #3c3c3c;
+    }
+
+    .ldio>div:nth-child(3) div:after {
+      left: -12px;
+      top: 46px;
+      box-shadow: 116px 0 0 0 #3c3c3c;
+    }
+
+    .ldio>div:nth-child(4) {
+      border-color: transparent;
+    }
+
+    .ldio>div:nth-child(4) div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: rotate(45deg);
+    }
+
+    .ldio>div:nth-child(4) div:before,
+    .ldio>div:nth-child(4) div:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      top: -12px;
+      left: 32px;
+      background: #939393;
+      border-radius: 50%;
+      box-shadow: 0 88px 0 0 #939393;
+    }
+
+    .ldio>div:nth-child(4) div:after {
+      left: -12px;
+      top: 32px;
+      box-shadow: 88px 0 0 0 #939393;
+    }
+
+    .spinner-double-ring {
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .ldio {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform: translateZ(0) scale(1);
+      backface-visibility: hidden;
+      transform-origin: 0 0;
+    }
+
+    .ldio div {
+      box-sizing: content-box;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>
+      We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
         properly without JavaScript enabled. Please enable it to
         continue.
-      </strong>
-    </noscript>
-    <div id="app">
-      <div class="loading">
-        <div class="loading-middle">
-          <div class="trademark">hwchr</div>
-          <div class="spinner-double-ring"><div class="ldio">
+    </strong>
+  </noscript>
+  <div id="app">
+    <div class="loading">
+      <div class="loading-middle">
+        <div class="trademark">hwchr</div>
+        <div class="spinner-double-ring">
+          <div class="ldio">
             <div></div>
             <div></div>
-            <div><div></div></div>
-            <div><div></div></div>
-          </div></div>
+            <div>
+              <div></div>
+            </div>
+            <div>
+              <div></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

@@ -10,7 +10,8 @@
 
         <v-card-subtitle class="pb-0">Short summary</v-card-subtitle>
         <v-card-text class="text--primary">
-          The osu! Malaysia Top 10 Voting is an annual community poll to determine the best performing Malaysian osu! players of the year. Anyone from any country is welcome to participate, provided their account and list follow the voting criteria below.
+          The osu! Malaysia Top Players Archive preserves every annual community poll since 2014 to celebrate the best performing Malaysian osu! players each year. Voting for 2026 is hosted on
+          <a href="https://omy.sh145.site" target="_blank" rel="noopener noreferrer" class="pink--text text--accent-2 font-weight-bold">omy.sh145.site</a>, and once voting closes, this site will showcase the official <b>2026 Top 15</b> placements (with no honorable mentions).
 
           <v-expansion-panels focusable class="my-6">
             <v-expansion-panel>
